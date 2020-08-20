@@ -1,5 +1,8 @@
 package com.motiveko.restaurants.interfaces;
 
+import static org.mockito.Mockito.verify;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -26,12 +29,49 @@ public class UserControllerTest {
 	
 	@Test
 	public void register() throws Exception {
+		String email = "admin@restaurant.com";
+		String name = "motiveko";
+		String password = "1234";
 		
 		mvc.perform(post("/register")
 					.contentType(MediaType.APPLICATION_JSON)
-					.content("{\"email\":\"admin@restaurant.com\",\"name\":\"motiveko\",\"password\":\"1234\"}\n"))
+					.content("{\"email\":\"" + email 
+							+ "\",\"name\":\"" + name
+							+"\",\"password\":\""+ password+"\"}\n"))
 			.andExpect(status().isCreated());
+	
+		verify(userService).registerUser(email,name,password);
 	}
 	
 
+	@Test
+	public void updateUser() throws Exception {
+		Long userId = 1L;
+		String email = "admin@restaurant.com";
+		String name = "motiveko";
+		String password = "1234";
+		
+		mvc.perform(patch("/update/"+userId)
+					.contentType(MediaType.APPLICATION_JSON)
+					.content("{\"email\":\"" + email 
+							+ "\",\"name\":\"" + name
+							+"\",\"password\":\""+ password+"\"}\n"))
+			.andExpect(status().isCreated());
+		
+		verify(userService).updateUser(userId,email,name,password);
+	}
+	
+	@Test
+	public void deactiveUser() throws Exception {
+		Long userId = 1L;
+		
+		mvc.perform(delete("/delete/"+userId))
+			.andExpect(status().isOk());
+		
+		verify(userService).deactiveUser(userId);
+		
+	}
+	
+
+	
 }

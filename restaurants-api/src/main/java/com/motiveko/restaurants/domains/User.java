@@ -37,5 +37,9 @@ public class User {
 	private Integer level; // 1: 일반, 2: admin
 	
 	private Integer isDeleted; // 0: not deleted , 1: deleted
+
+	public Object isActive() {
+		return isDeleted==1;
+	}
 	
 }

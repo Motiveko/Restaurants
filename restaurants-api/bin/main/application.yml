@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3006/restaurants?characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/restaurants?characterEncoding=UTF-8&serverTimezone=UTC
     username: motiveko
     password: 12345678
   jpa:
