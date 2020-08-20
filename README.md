@@ -3,13 +3,13 @@
 
 ### 사용될 기술
  #### Backend
-  > Spring boot
-  > Spring data Jpa, Spring Security, .. etc
-  > Mysql
+  * Spring boot
+  * Spring data Jpa, Spring Security, .. etc
+  * Mysql
   
  #### FrontEnd
-  > node.js , webpack, bootstrap
-  > naver maps
-  > .. etc
+  * node.js , webpack, bootstrap
+  * naver maps
+  * .. etc
   
 부디 완성하기를
