@@ -1,7 +1,9 @@
-package com.motiveko.restaurants.applictaions;
+package com.motiveko.restaurants.applications;
 
 import java.util.Optional;
 
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
 import javax.transaction.Transactional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -76,12 +78,20 @@ public class UserService {
 		
 		// 이메일 검증
 		User user = userRepository.findByEmail(email)
-									.orElseThrow( () -> new EmailNotExistedException());
-		//패스워드 검증
-		String encodedPassword = passwordEncoder.encode(password);
-		if( !encodedPassword.equals(user.getPassword())) {
+									.orElseThrow( () -> new EmailNotExistedException(email));
+		
+		
+		//패스워드 검증 이렇게하면 뭐가 안된다. encode할때마다 다른값나옴
+//		String encodedPassword = passwordEncoder.encode(password);
+//		if( !encodedPassword.equals(user.getPassword())) {
+//			throw new InvalidPasswordException();
+//		}
+		// 패스워드 검증은 이렇게해야한다.
+		if(!passwordEncoder.matches(password, user.getPassword())) {
 			throw new InvalidPasswordException();
 		}
+		
+//		HttpServletResponse response;
 		
 		return user;
 	}

@@ -15,7 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.motiveko.restaurants.applictaions.UserService;
+import com.motiveko.restaurants.applications.UserService;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(UserController.class)
@@ -33,7 +33,7 @@ public class UserControllerTest {
 		String name = "motiveko";
 		String password = "1234";
 		
-		mvc.perform(post("/register")
+		mvc.perform(post("/registerUser")
 					.contentType(MediaType.APPLICATION_JSON)
 					.content("{\"email\":\"" + email 
 							+ "\",\"name\":\"" + name
@@ -51,7 +51,7 @@ public class UserControllerTest {
 		String name = "motiveko";
 		String password = "1234";
 		
-		mvc.perform(patch("/update/"+userId)
+		mvc.perform(patch("/updateUser/"+userId)
 					.contentType(MediaType.APPLICATION_JSON)
 					.content("{\"email\":\"" + email 
 							+ "\",\"name\":\"" + name
@@ -65,7 +65,7 @@ public class UserControllerTest {
 	public void deactiveUser() throws Exception {
 		Long userId = 1L;
 		
-		mvc.perform(delete("/delete/"+userId))
+		mvc.perform(delete("/deleteUser/"+userId))
 			.andExpect(status().isOk());
 		
 		verify(userService).deactiveUser(userId);

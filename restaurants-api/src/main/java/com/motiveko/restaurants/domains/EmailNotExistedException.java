@@ -5,8 +5,8 @@ import java.util.function.Supplier;
 public class EmailNotExistedException extends RuntimeException {
 
 
-	public EmailNotExistedException() {
-		super("Email do not exists");
+	public EmailNotExistedException(String email) {
+		super("Email do not exists : " + email);
 	}
 
 }

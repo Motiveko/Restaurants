@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.motiveko.restaurants.applications.UserService;
 import com.motiveko.restaurants.domains.EmailExistedException;
 import com.motiveko.restaurants.domains.EmailNotExistedException;
 import com.motiveko.restaurants.domains.InvalidPasswordException;
@@ -117,7 +118,6 @@ public class UserServiceTest {
 		
 		assertThat(user.isActive(),is(true));
 	}
-
 
 	// 잘못된 이메일로 로그인시도
 	@Test(expected = EmailNotExistedException.class)
