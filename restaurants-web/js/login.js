@@ -1,3 +1,4 @@
+const frontRoot = "http://localhost:3000";
 (function ($) {
 	"use strict";
 
@@ -40,7 +41,7 @@
 			// 씨바 이렇게 stringify해서 "key":"value"로 넘겨줘야합니다 아니면 못알아먹네요씨바
 			var string = JSON.stringify(data);
 			console.log(string);
-			
+			// fetch("http://localhost:8090/login");
 			$.ajax({
 				url: "http://localhost:8090/login",
 				method: "POST",
@@ -49,7 +50,7 @@
 				data: string,
 				success: function (res) {
 					console.log(res);
-					window.location.href = 'http://localhost:3000/'+res;
+					// window.location.href = frontRoot;
 				},
 				error: function (a,b,c) {
 					console.log("실패");

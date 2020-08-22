@@ -1,7 +1,6 @@
 package com.motiveko.restaurants.interfaces;
 
 import java.net.URI;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,16 +20,16 @@ import com.motiveko.restaurants.applications.UserService;
 import com.motiveko.restaurants.domains.SessionRequestDto;
 import com.motiveko.restaurants.domains.User;
 
-@CrossOrigin
 @RestController
+@CrossOrigin
 public class SessionController {
 
 	
 	@Autowired
 	UserService userService;
 	
-	@GetMapping("/login")
-	public String login(@RequestBody SessionRequestDto resource
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestBody SessionRequestDto resource
 						,HttpSession session
 						) throws Throwable {
 		System.out.println("로그인시도");
@@ -44,9 +43,10 @@ public class SessionController {
 			session.setAttribute("sName", user.getName());
 			session.setAttribute("sLevel", user.getLevel());
 		}
+		System.out.println("성공이쥬?");
 
 		// ajax 에서 success로 걸리려면 .ok여야한다. .created는 error로 가버린다
-		return "/index.html";
+		return ResponseEntity.created(new URI("/index.html")).body("{}");
 	}
 	
 	@GetMapping("/authentication")

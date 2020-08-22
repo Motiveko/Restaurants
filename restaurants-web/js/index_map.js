@@ -1,5 +1,7 @@
 // import { createPublicKey } from "crypto";
 
+const rootUrl = "http://localhost:8090";
+
 $(document).ready(function () {
 	// 지도 외 일반기능
 
@@ -279,12 +281,37 @@ $(".restaurandList").on('click', 'tr', function (e) {
 function getRestaurantList(mapBounds, page) {
 
 	var data = {
-		"maxLat": mapBounds._max._lat,
-		"minLat": mapBounds._min._lat,
-		"maxLng": mapBounds._max._lng,
-		"minLng": mapBounds._min._lng
+		"maxLat": String(mapBounds._max._lat),
+		"minLat": String(mapBounds._min._lat),
+		"maxLng": String(mapBounds._max._lng),
+		"minLng": String(mapBounds._min._lng),
+		"page": String(page)
 	};
-	console.log(JSON.stringify(data));
-	//ajax로 가져오자
+	// var data = {
+	// 	maxLat: mapBounds._max._lat,
+	// 	minLat: mapBounds._min._lat,
+	// 	maxLng: mapBounds._max._lng,
+	// 	minLng: mapBounds._min._lng,
+	// 	page: page
+	// };
+	// var jsonData = `{"maxLat":"37.5343707","minLat":"37.5071406","maxLng":"126.9110697","minLng":"126.8896121","page":"1"}`;
+	var jsonData = JSON.stringify(data);
+
+	console.log(data);
+	$.ajax({
+		url: rootUrl+"/getRestaurantList",
+		contentType: 'application/json',
+		dataType: "json",
+		data: data,
+		success: function(res){
+			console.log(res);
+		},
+		error: function(){
+			alert("실패");
+		}
+
+	})
+
+	
 
 }

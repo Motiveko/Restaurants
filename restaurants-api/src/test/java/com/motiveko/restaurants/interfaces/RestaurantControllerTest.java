@@ -7,6 +7,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.mockito.BDDMockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.ArgumentMatchers.*;
+
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -56,8 +59,16 @@ public class RestaurantControllerTest {
 						+ "\"category\":\""+category+"\"}"))
 				.andExpect(status().isCreated())
 				.andExpect(content().string(containsString("restaurantId")));
+	}
+	
+	@Test
+	public void getRestaurantList() throws Exception {
+		mvc.perform(get("/getRestaurantList")
+					.contentType(MediaType.APPLICATION_JSON)
+					.content("{\"maxLat\":37.5343707,\"minLat\":37.5071406,\"maxLng\":126.9110697,\"minLng\":126.8896121,\"page\":1}"))
+			.andExpect(status().isOk());
 		
-		
+		verify(restaurantService).getRestaurantList(any());
 	}
 
 
