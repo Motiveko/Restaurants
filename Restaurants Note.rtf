@@ -1,8 +1,13 @@
 {\rtf1\ansi\ansicpg949\cocoartf2511
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;\f1\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;\f1\fswiss\fcharset0 Helvetica;\f2\froman\fcharset0 Times-Roman;
+\f3\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue233;\red202\green202\blue202;\red23\green23\blue23;
+\red89\green138\blue67;\red70\green137\blue204;\red140\green211\blue254;\red67\green192\blue160;\red212\green214\blue154;
+}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c93333;\cssrgb\c83137\c83137\c83137;\cssrgb\c11765\c11765\c11765;
+\cssrgb\c41569\c60000\c33333;\cssrgb\c33725\c61176\c83922;\cssrgb\c61176\c86275\c99608;\cssrgb\c30588\c78824\c69020;\cssrgb\c86275\c86275\c66667;
+}
+\paperw11900\paperh16840\margl1440\margr1440\vieww21680\viewh8400\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \f0\fs24 \cf0 \'c0\'cf\'b4\'dc
@@ -35,9 +40,221 @@
  - \'c6\'e4\'c0\'cc\'c1\'f6 \'c0\'da\'c3\'bc\'b8\'a6 \'b0\'a8\'c3\'df\'b4\'c2\'b0\'cd\'c0\'ba \'be\'ee\'b6\'bb\'b0\'d4\'c7\'d2\'b0\'cd\'c0\'ce\'b0\'a1? \'b9\'e8\'bf\'ec\'c1\'f6 \'b8\'f8\'c7\'d1\'b3\'bb\'bf\'eb\'c0\'cc\'b4\'d9. \'be\'c6\'b8\'b6 frontend\'b8\'a6 \'b1\'e2\'ba\'bb\'c0\'fb\'c0\'b8\'b7\'ce \'ba\'d0\'b8\'ae\'c7\'d8\'be\'df\'c7\'d2\'b5\'ed \
  - \'c0\'cc\'b0\'c5\'b4\'c2 \'c0\'cf\'b4\'dc \'b1\'e2\'b4\'c9 \'b1\'b8\'c7\'f6 \'c7\'cf\'b0\'ed \'c1\'d6\'b9\'ae\'c7\'d1 \'c3\'a5 \'bf\'c0\'b8\'e9 \'c2\'fc\'b0\'ed\'c7\'d8\'ba\'b8\'c0\'da.\
 \
-ajax\'b8\'a6 \'c0\'cc\'bf\'eb\'c7\'d8\'bc\'ad response\'b9\'de\'c0\'bb \'b6\'a7 http response\'b8\'a6 \'b9\'de\'b4\'c2\'b9\'fd( status\'b3\'aa \'c7\'ec\'b4\'f5\'b8\'a6 \'c0\'d0\'b4\'c2\'b9\'e6\'b9\'fd)\
+ajax\'b8\'a6 \'c0\'cc\'bf\'eb\'c7\'d8\'bc\'ad response\'b9\'de\'c0\'bb \'b6\'a7 http response\'b8\'a6 \'b9\'de\'b4\'c2\'b9\'fd( status\'b3\'aa \'c7\'ec\'b4\'f5\'b8\'a6 \'c0\'d0\'b4\'c2\'b9\'e6\'b9\'fd) -> \'b2\'c0\'b9\'de\'be\'c6\'be\'df\'c7\'cf\'b4\'c2\'b0\'a1\'b5\'b5, restful\'c0\'ba resource\'bf\'a1 \'c1\'fd\'c1\'df\'c7\'d1\'b4\'d9\'b4\'c2\'b5\'a5..\
+\
+ - \'b7\'b9\'bd\'ba\'c5\'e4\'b6\'fb \'bb\'f3\'bc\'bc\'c1\'a4\'ba\'b8\'b4\'c2 \'c6\'cb\'be\'f7\'c0\'bb \'c0\'cc\'bf\'eb\'c7\'d2 \'bf\'b9\'c1\'a4\
+ - \'c6\'e4\'c0\'cc\'c2\'a1\'c0\'ba samplespring \'c2\'fc\'c1\'b6, \'b1\'e2\'c5\'b8 \'c2\'fc\'c1\'b6\'c7\'d2\'b0\'c5 \'b8\'b9\'c0\'bb\'b5\'ed\'c7\'cf\'b4\'d9 \'c0\'cc\'b0\'c5\'b4\'c2\
+\
+********** \'c1\'f6\'b5\'b5 \'b1\'e2\'b4\'c9 \'bb\'e7\'bf\'eb *************\
+\uc0\u8212  \'b7\'b9\'bd\'ba\'c5\'e4\'b6\'fb \'ba\'b8\'b1\'e2\'b0\'fc\'b7\'c3\
+ 1. \'b7\'b9\'bd\'ba\'c5\'e4\'b6\'fb \'b8\'f1\'b7\'cf \'b7\'ce\'b5\'f9 \'bd\'c3 \'c7\'d8\'b4\'e7 \'c1\'c2\'c7\'a5\'b0\'a1\'c1\'f6\'b0\'ed \'b8\'b6\'c4\'bf \'b7\'a3\'b4\'f5\'b8\'b5, \'c0\'cf\'b9\'dd\'b8\'b6\'c4\'bf \'b8\'bb\'b0\'ed ABC\'b7\'ce \'c7\'cf\'b8\'e9 BEST!\
+ 2. \'b8\'f1\'b7\'cf \'b8\'b6\'c4\'bf\'bf\'a1\'bc\'ad \'c7\'d8\'b4\'e7 \'b8\'b6\'c4\'bf \'bc\'b1\'c5\'c3\'bd\'c3 \'b8\'b6\'c4\'bf \'bf\'f2\'c1\'f7\'c0\'d3 \'be\'f8\'be\'d6\'b0\'ed \'b3\'aa\'b8\'d3\'c1\'f6 \'b8\'b6\'c4\'bf\'b5\'e9\'c0\'ba Bounce, \'b1\'d7\'b8\'ae\'b0\'ed \'c7\'d8\'b4\'e7 \'b8\'b6\'c4\'bf\'b7\'ce \'c1\'dc\'c7\'cf\'b1\'e2\
+ 3. \'c1\'f6\'b5\'b5 \'c0\'cc\'b5\'bf \'c8\'c4 \'bb\'f5\'b7\'ce\'b0\'ed\'c4\'a7 \'b9\'f6\'c6\'b0 \'b4\'a9\'b8\'a3\'b8\'e9 \'c7\'d8\'b4\'e7 \'c1\'f6\'bf\'aa\'bf\'a1 \'b4\'eb\'c7\'d8 \'b8\'c0\'c1\'fd \'b7\'ce\'b5\'f9 \'b0\'a1\'b4\'c9( \'b8\'ae\'c7\'c1\'b7\'b9\'bd\'ac \'c7\'d2 \'b6\'a7 \'c1\'dc\'b7\'b9\'ba\'a7 \'c1\'a4\'c7\'cf\'b0\'ed \'b1\'d7 \'b1\'e2\'ba\'bb\'c1\'dc \'b7\'b9\'ba\'a7 \'be\'c8\'bf\'a1 \'b5\'e9\'be\'ee\'c0\'d6\'b4\'c2 \'b0\'cd\'b5\'e9\'b8\'b8 \'b7\'ce\'b5\'f9.. -> db\'bf\'a1\'bc\'ad \'b7\'ce\'b5\'f9\'c7\'d8\'be\'df\'c7\'d2\'b0\'c5\'b0\'b0\'c0\'ba\'b5\'a5. jpa \'c4\'f5\'b8\'ae\'b8\'a6 \'c1\'b6\'b0\'c7\'b9\'ae\'c0\'bb \'b3\'d6\'be\'ee\'be\'df\'c7\'d2\'b5\'ed, jpa\'c1\'bb\'b4\'f5 \'bf\'ac\'b1\'b8\'c7\'ca\'bf\'e4)\
+ \
+\
+\uc0\u8212  \'b7\'b9\'bd\'ba\'c5\'e4\'b6\'fb \'b5\'ee\'b7\'cf\'b0\'fc\'b7\'c3\
+ 1. \'c1\'d6\'bc\'d2 \'b0\'cb\'bb\'f6 \'bd\'c3 \'c7\'d8\'b4\'e7\'c1\'f6\'bf\'a9\'b0\'db \'b8\'b6\'c4\'bf \'bb\'fd\'bc\'ba\
+ 2. \'b8\'b6\'c4\'bf\'bb\'fd\'bc\'ba \'bd\'c3 \'c7\'d8\'b4\'e7\'c1\'f6\'c1\'a1 \'c1\'d6\'bc\'d2 \'c7\'a5\'bd\'c3(\'c1\'d6\'bc\'d2/\'c1\'c2\'c7\'a5)\
 \
 \
-\
+\'b4\'e7\'c0\'e5 \'c7\'d8\'be\'df \'c7\'d2 \'b0\'c5\
+ - \'b7\'b9\'bd\'ba\'c5\'e4\'b6\'fb \'c1\'a4\'ba\'b8 \'b1\'e2\'ba\'bb\'c0\'b8\'b7\'ce \'b0\'a1\'c1\'ae\'bf\'cd\'be\'df\'c7\'cf\'b4\'c2\'b5\'a5 jpa\'b7\'ce \'bf\'f8\'c7\'cf\'b4\'c2 \'c0\'a7\'c4\'a1 \'b9\'fc\'c0\'a7\'c0\'c7 db\'b8\'b8 \'b1\'dc\'be\'ee\'bf\'c0\'b4\'c2\'b0\'c5 \'be\'ee\'c4\'c9\'c7\'cf\'b4\'c2\'c1\'f6\
+\pard\pardeftab720\sl280\partightenfactor0
+{\field{\*\fldinst{HYPERLINK "https://www.baeldung.com/spring-data-jpa-query"}}{\fldrslt 
+\f2 \cf2 \expnd0\expndtw0\kerning0
+\ul \ulc2 \outl0\strokewidth0 \strokec2 https://www.baeldung.com/spring-data-jpa-query}} :: \'b1\'d7\'b3\'c9 @Query \'be\'ee\'b3\'eb\'c5\'d7\'c0\'cc\'bc\'c7 \'be\'b2\'b0\'ed \'c4\'f5\'b8\'ae\'c0\'db\'bc\'ba\'c7\'cf\'b8\'e9 \'b5\'c7\'b4\'c2\'b5\'ed?\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0  \
+\'b9\'e8\'bf\'ee\'c1\'a1\
 session\'c0\'bb \'c5\'eb\'c7\'d1 \'b0\'fc\'b8\'ae\'bf\'cd jwt\'c0\'c7 \'c2\'f7\'c0\'cc(jwt\'b0\'a1 \'b4\'f5 \'c1\'c1\'c0\'ba\'c0\'cc\'c0\'af)\
-session\'c0\'ba request\'bd\'c3 \'b8\'b6\'b4\'d9 \'bc\'ad\'b9\'f6\'b0\'a1 session\'bf\'a1 \'b5\'a5\'c0\'cc\'c5\'cd\'b8\'a6 \'bf\'e4\'c3\'bb\'c7\'cf\'b4\'c2 \'c0\'db\'be\'f7\'c0\'bb \'c7\'d8\'be\'df\'c7\'cf\'c1\'f6\'b8\'b8 jwt\'b4\'c2 \'c0\'af\'c0\'fa\'b0\'a1 \'b3\'d1\'b0\'dc\'c1\'d6\'b0\'ed \'bf\'a9\'b1\'e2\'bf\'a1 \'c0\'a2\'b8\'b8\'c7\'d1 \'c7\'ca\'bf\'e4\'c7\'d1 \'bb\'e7\'bf\'eb\'c0\'da \'c1\'a4\'ba\'b8\'b4\'c2 \'b4\'d9 \'b5\'e9\'be\'ee\'c0\'d6\'b1\'e2\'b6\'a7\'b9\'ae\'bf\'a1 \'b5\'fb\'b7\'ce \'bf\'e4\'c3\'bb\'c7\'d2\'b0\'d4 \'be\'f8\'be\'ee\'bc\'ad \'ba\'fc\'b8\'a3\'b4\'d9!}
+session\'c0\'ba request\'bd\'c3 \'b8\'b6\'b4\'d9 \'bc\'ad\'b9\'f6\'b0\'a1 session\'bf\'a1 \'b5\'a5\'c0\'cc\'c5\'cd\'b8\'a6 \'bf\'e4\'c3\'bb\'c7\'cf\'b4\'c2 \'c0\'db\'be\'f7\'c0\'bb \'c7\'d8\'be\'df\'c7\'cf\'c1\'f6\'b8\'b8 jwt\'b4\'c2 \'c0\'af\'c0\'fa\'b0\'a1 \'b3\'d1\'b0\'dc\'c1\'d6\'b0\'ed \'bf\'a9\'b1\'e2\'bf\'a1 \'c0\'a2\'b8\'b8\'c7\'d1 \'c7\'ca\'bf\'e4\'c7\'d1 \'bb\'e7\'bf\'eb\'c0\'da \'c1\'a4\'ba\'b8\'b4\'c2 \'b4\'d9 \'b5\'e9\'be\'ee\'c0\'d6\'b1\'e2\'b6\'a7\'b9\'ae\'bf\'a1 \'b5\'fb\'b7\'ce \'bf\'e4\'c3\'bb\'c7\'d2\'b0\'d4 \'be\'f8\'be\'ee\'bc\'ad \'ba\'fc\'b8\'a3\'b4\'d9!\
+\
+\
+\
+\
+\'c1\'d6\'bc\'ae \'b9\'e9\'be\'f7\
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec3 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf3 \cb4     \cf5 \strokec5 // Map
+\f0 \'bf\'a1
+\f3  
+\f0 \'c0\'cc\'ba\'a5\'c6\'ae
+\f3  
+\f0 \'c7\'d2\'b4\'e7
+\f3 , 
+\f0 \'c5\'ac\'b8\'af\'bd\'c3
+\f3  
+\f0 \'bb\'fd\'bc\'ba\'c7\'d8\'b3\'f5\'c0\'ba
+\f3  marker
+\f0 \'b8\'a6
+\f3  
+\f0 \'bc\'be\'c5\'cd\'b7\'ce
+\f3  zoom
+\f0 \'c0\'ba
+\f3  12
+\f0 \'b7\'ce
+\f3  
+\f0 \'c7\'a5\'bd\'c3\'b5\'c8\'b4\'d9
+\f3 .\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 // var markerOptions = \{\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //     position: map.getCenter(),\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //     map: map,\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //     title: 'Click to zoooooom'\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 // \};\cf3 \cb1 \strokec3 \
+\
+\cb4     \cf5 \strokec5 // var marker = new naver.maps.Marker(markerOptions);\cf3 \cb1 \strokec3 \
+\
+\cb4     \cf5 \strokec5 // var mapElement = map.getElement();\cf3 \cb1 \strokec3 \
+\
+\cb4     \cf5 \strokec5 // var listener = naver.maps.Event.addDOMListener(mapElement, 'click', function()\{\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //     map.setZoom(12);\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //     map.setCenter(marker.getPosition());\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //     // 
+\f0 \'c0\'cc\'ba\'a5\'c6\'ae
+\f3  
+\f0 \'c1\'a6\'b0\'c5\'b5\'b5
+\f3  
+\f0 \'b0\'a1\'b4\'c9\'c7\'d4
+\f3 \cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //     // naver.maps.Event.removeDOMListener(listener);\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 // \});\cf3 \cb1 \strokec3 \
+\
+\cb4     \cf5 \strokec5 // 
+\f0 \'c1\'f6\'b5\'b5\'b0\'b4\'c3\'bc\'b0\'a1
+\f3  
+\f0 \'b0\'a1\'c1\'f6\'b4\'c2
+\f3  
+\f0 \'bf\'c9\'bc\'c7
+\f3  
+\f0 \'b9\'dd\'c8\'af
+\f3  (key) 
+\f0 \'b7\'ce
+\f3  
+\f0 \'bc\'b1\'c5\'c3\'b5\'b5\'b0\'a1\'b4\'c9
+\f3 \cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 // console.log(map.getOptions()); \cf3 \cb1 \strokec3 \
+\
+\
+\cb4     \cf5 \strokec5 // KVO Status Change Event : KVO 
+\f0 \'bb\'f3\'c5\'c2\'b0\'a1
+\f3  
+\f0 \'ba\'af\'b0\'e6\'b5\'c7\'b4\'c2\'b0\'cd\'bf\'a1
+\f3  
+\f0 \'b4\'eb\'c7\'d8
+\f3  
+\f0 \'c0\'cc\'ba\'a5\'c6\'ae\'b8\'a6
+\f3  
+\f0 \'b0\'c9
+\f3  
+\f0 \'bc\'f6
+\f3  
+\f0 \'c0\'d6\'b4\'d9
+\f3 .\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 // var contentEl = $('<div class="iw_inner" style="width:350px;position:absolute;top:0;right:0;z-index:1000;background-color:#fff;border:solid 1px #333;">'\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //         + '<h3>Map States</h3>'\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //         + '<p style="font-size:14px;">zoom : <em class="zoom">'+ map.getZoom() +'</em></p>'\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //         + '<p style="font-size:14px;">center : <em class="center">'+ map.getCenter() +'</em></p>'\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //         + '<p style="font-size:14px;">bounds : <em class="bounds">'+ map.getBounds() +'</em></p>'\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //         + '</div>');\cf3 \cb1 \strokec3 \
+\
+\cb4     \cf5 \strokec5 // contentEl.appendTo(map.getElement());\cf3 \cb1 \strokec3 \
+\
+\cb4     \cf5 \strokec5 // var zoomChanger = naver.maps.Event.addListener(map,'zoom_changed',function(zoom)\{\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //     console.log("zoom changed : " + zoom);\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //     contentEl.find('.zoom').text(zoom);\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //     // map.removeListener(zoomChanger);\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 // \});\cf3 \cb1 \strokec3 \
+\
+\cb4     \cf5 \strokec5 // console.log(zoomChanger); // MapEventListener 
+\f0 \'b0\'b4\'c3\'bc
+\f3 \cf3 \cb1 \strokec3 \
+\
+\cb4     \cf5 \strokec5 // var boundChanger = naver.maps.Event.addListener(map,'bounds_changed',function(bound)\{\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //     console.log("bound changed : "+ bound);\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //     contentEl.find('.center').text(map.getCenter());\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //     contentEl.find('.bounds').text(bound);\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //     // map.removeListener(boundChanger);\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 // \})\cf3 \cb1 \strokec3 \
+\
+\cb4     \cf5 \strokec5 // UI Event : 
+\f0 \'c0\'cf\'b9\'dd
+\f3  click
+\f0 \'b5\'ee
+\f3  
+\f0 \'c0\'cc\'ba\'a5\'c6\'ae
+\f3 .\cf3 \cb1 \strokec3 \
+\
+\cb4     \cf5 \strokec5 // 
+\f0 \'c4\'c1\'c6\'ae\'b7\'d1
+\f3  : 
+\f0 \'c1\'f6\'b5\'b5\'b8\'a6
+\f3  
+\f0 \'c4\'c1\'c6\'ae\'b7\'d1
+\f3  
+\f0 \'c7\'d2
+\f3  
+\f0 \'bc\'f6
+\f3  
+\f0 \'c0\'d6\'b4\'c2
+\f3  UI Interfaces 
+\f0 \'c1\'a6\'b0\'f8
+\f3 \cf3 \cb1 \strokec3 \
+\cb4     \cf6 \strokec6 var\cf3 \strokec3  \cf7 \strokec7 mapOptions\cf3 \strokec3  = \{\cb1 \
+\cb4         \cf7 \strokec7 scaleControl:\cf3 \strokec3  \cf6 \strokec6 true\cf3 \strokec3 ,\cb1 \
+\cb4         \cf7 \strokec7 logoControl:\cf3 \strokec3  \cf6 \strokec6 true\cf3 \strokec3 ,\cb1 \
+\cb4         \cf7 \strokec7 mapDataControl:\cf3 \strokec3  \cf6 \strokec6 true\cf3 \strokec3 ,\cb1 \
+\cb4         \cf7 \strokec7 mapTypeControl:\cf3 \strokec3  \cf6 \strokec6 false\cf3 \strokec3 ,\cb1 \
+\cb4         \cf7 \strokec7 zoomControl:\cf3 \strokec3  \cf6 \strokec6 false\cf3 \cb1 \strokec3 \
+\cb4     \}\cb1 \
+\
+\cb4     \cf5 \strokec5 // 
+\f0 \'c5\'ac\'b8\'af\'c0\'b8\'b7\'ce
+\f3  
+\f0 \'b8\'b6\'c4\'bf\'bb\'fd\'bc\'ba
+\f3 \cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 // naver.maps.Event.addListener(map, 'click', function (e) \{\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //  console.log('click');\cf3 \cb1 \strokec3 \
+\
+\cb4     \cf5 \strokec5 //  var markerOptions = \{\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //      position: e.coord,\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //      map: map,\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //      animation: naver.maps.Animation.BOUNCE,\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //      title: "TITLE TEST",\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //      cursor: "CURSOR TEST",\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //      draggable: true,\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //      clickable: true\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //  \}\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //  var marker = new naver.maps.Marker(markerOptions);\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //  // 
+\f0 \'b8\'b6\'c4\'bf
+\f3  
+\f0 \'b4\'f5\'ba\'ed\'c5\'ac\'b8\'af
+\f3  
+\f0 \'bd\'c3
+\f3  
+\f0 \'c1\'a6\'b0\'c5
+\f3 \cf3 \cb1 \strokec3 \
+\cb4         \cf5 \strokec5 // var listener = naver.maps.Event.addListener(marker, 'dblclick', function () \{\cf3 \cb1 \strokec3 \
+\cb4         \cf5 \strokec5 //  console.log("marker dblclick");\cf3 \cb1 \strokec3 \
+\cb4         \cf5 \strokec5 //  var markerElement = marker.getElement();\cf3 \cb1 \strokec3 \
+\cb4         \cf5 \strokec5 //  markerElement.remove();\cf3 \cb1 \strokec3 \
+\cb4         \cf5 \strokec5 // \})\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 // \});\cf3 \cb1 \strokec3 \
+\
+\
+\cb4     \cf8 \strokec8 console\cf3 \strokec3 .\cf9 \strokec9 log\cf3 \strokec3 (\cf7 \strokec7 map\cf3 \strokec3 .\cf9 \strokec9 getBounds\cf3 \strokec3 ());\cb1 \
+\cb4     \cf5 \strokec5 // var boundChanger = naver.maps.Event.addListener(map,'bounds_changed',function(bound)\{\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //     console.log("bound changed : "+ bound);\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //     contentEl.find('.center').text(map.getCenter());\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //     contentEl.find('.bounds').text(bound);\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 //     // map.removeListener(boundChanger);\cf3 \cb1 \strokec3 \
+\cb4     \cf5 \strokec5 // \})\cf3 \cb1 \strokec3 \
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
+\
+}

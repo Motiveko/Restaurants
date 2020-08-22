@@ -1,39 +1,162 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-    <!-- JQuery -->
-    <script type="text/javascript" src="./js/jquery-3.5.1.min.js"></script>
-    <!-- BootStrap -->
-    <link rel="stylesheet" href="./css/bootstrap.min.css"
-        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ddrgm7aolc">
-    </script>
-<title>EatGo</title>
+	<meta charset="UTF-8">
+	<!-- JQuery -->
+	<script type="text/javascript" src="./js/jquery-3.5.1.min.js"></script>
+	<!-- BootStrap -->
+	<link rel="stylesheet" href="./css/bootstrap.min.css"
+		integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+	<script type="text/javascript" src="./js/bootstrap.min.js"></script>
+	<!-- Naver Maps-->
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ddrgm7aolc">
+	</script>
+
+	<!-- Geocode API, Sub Module -->
+	<script type="text/javascript"
+		src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ddrgm7aolc&submodules=geocoder"></script>
+
+	<style>
+		.header {
+			background-color: orange;
+		}
+
+		.body_left {
+			background-color: bisque;
+		}
+
+		.body_right {
+			background-color: blanchedalmond;
+		}
+
+		#map {
+		
+			display: none;
+			position: absolute;
+			width: 500px;
+			height: 800px;
+			margin: 5px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.mybtn {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.btn_wrap {
+			margin-top: 14px;
+		}
+	</style>
+
+	<title>EatGo</title>
 </head>
+
 <body>
 
+	<div class="container">
 
-	Hello!!
-	<div id="app">
-	
+		<div class="row header">
+			여기는 해더입니다.
+		</div>
+		<div class="row">
+				<div class="col-md-6">
+						<table class="table table-hover restaurandList" >
+							<tr>
+								<th>순번</th>
+								<th>이름</th>
+								<th>주소</th>
+								<th>구분</th>
+							</tr>
+							<tr restaurantId="1">
+								<td>1</td>
+								<td>테스트밥집</td>
+								<td>영등포구 영신로 193</td>
+								<td>한식</td>
+							</tr>
+							<tr restaurantId="2">
+								<td>2</td>
+								<td>테스트커피집</td>
+								<td>영등포구 당산동</td>
+								<td>카페</td>
+							</tr>
+							<tr restaurantId="3">
+								<td>3</td>
+								<td>테스트 파스타</td>
+								<td>영등포구 독산동</td>
+								<td>양식</td>
+							</tr>
+							<tr restaurantId="4">
+								<td>4</td>
+								<td>테스트 떡볶이</td>
+								<td>영등포구 신정동</td>
+								<td>분식</td>
+							</tr>
+							<tr restaurantId="5">
+								<td>5</td>
+								<td>테스트커피집</td>
+								<td>영등포구 당산동</td>
+								<td>카페</td>
+							</tr>
+							<tr restaurantId="6">
+								<td>6</td>
+								<td>테스트커피집</td>
+								<td>영등포구 당산동</td>
+								<td>카페</td>
+							</tr>
+							<tr restaurantId="7">
+								<td>7</td>
+								<td>테스트커피집</td>
+								<td>영등포구 당산동</td>
+								<td>카페</td>
+							</tr>
+							<tr restaurantId="8">
+								<td>8</td>
+								<td>테스트커피집</td>
+								<td>영등포구 당산동</td>
+								<td>카페</td>
+							</tr>
+							<tr restaurantId="9">
+								<td>9</td>
+								<td>테스트커피집</td>
+								<td>영등포구 당산동</td>
+								<td>카페</td>
+							</tr>
+							<tr restaurantId="10">
+								<td>10</td>
+								<td>테스트커피집</td>
+								<td>영등포구 당산동</td>
+								<td>카페</td>
+							</tr>
+						</table>
+				</div>			
+			<div class="col-md-6">
+				<!-- map resolved -->
+				<div>
+
+					<div id="map" class=""></div>
+					 <p class="btn_wrap">
+						<button class="btn btn-default morphBtn">내위치로</button>
+						<button class="btn btn-default refreshBtn">지도갱신</button>
+					</p>
+					<!-- <form action="#" class="form-inline">
+						<input type="text" id="address" class="form-control" placeholder="주소를 입력하세요.">
+						<button type="submit" id="submit" class="btn btn-primary">검색</button>
+					</form> -->
+				</div>
+				<hr>
+			</div>
+		</div>
 	</div>
-	
-	<form action="#" id="registerForm">
 
-		<input type="text" name="email" />
-		<input type="text" name="name" />
-		<input tpye="password" name="password" />
-
-	</form>
-
-	<button class="btn btn-primary submitBtn">실험</button>
 
 	<!-- dev-server가 index.js를 main.js로 바꿔준다!? -->
-	<script src="./main.js">
-	
-	</script>
-	
+	<script src="./js/index_map.js"></script>
+	<script src="./main.js"></script>
+
 </body>
+
 </html>

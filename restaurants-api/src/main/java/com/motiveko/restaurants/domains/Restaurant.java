@@ -30,6 +30,9 @@ public class Restaurant {
 	
 	// 위치정보
 	@NotNull
+	private String address;
+	
+	@NotNull
 	private Double lat;
 	
 	@NotNull
