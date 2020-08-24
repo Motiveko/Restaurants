@@ -1,0 +1,56 @@
+.navbar-brand{
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.logo{
+    margin-top: 10px;
+    margin-bottom: auto;
+    width: 30px;
+    height: 30px;
+}
+
+.profile{
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-top : 10px;
+    width: 30px;
+    cursor: pointer;
+}
+
+.body_left {
+    background-color: bisque;
+}
+
+.body_right {
+    background-color: blanchedalmond;
+}
+
+#map {
+
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 700px;
+    margin: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.mybtn {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn_wrap {
+    margin-top: 14px;
+}
+
+tr {
+    cursor: pointer;
+}
+
+.container-fluid{
+    padding-left: 10%;
+    padding-right: 10%;
+}

@@ -55,13 +55,11 @@ public class RestaurantController {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> modelMap = new HashMap<String, Object>();
-		System.out.println("리쏘스");
 		System.out.println(resources);
 		
 		List<Restaurant> list = restaurantService.getRestaurantList(resources);
 		modelMap.put("list", list);
 		
-		System.out.println("시발 성공했니..?");
 		System.out.println(mapper.writeValueAsString(modelMap));
 		return mapper.writeValueAsString(modelMap);
 	}
