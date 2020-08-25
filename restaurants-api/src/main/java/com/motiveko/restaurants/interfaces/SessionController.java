@@ -46,7 +46,7 @@ public class SessionController {
 		System.out.println("성공이쥬?");
 
 		// ajax 에서 success로 걸리려면 .ok여야한다. .created는 error로 가버린다
-		return ResponseEntity.created(new URI("/index.html")).body("{\"result\":\"success!\"}");
+		return ResponseEntity.created(new URI("/index.html")).body("{\"result\":\"success!		\"}");
 	}
 	
 	@GetMapping("/authentication")

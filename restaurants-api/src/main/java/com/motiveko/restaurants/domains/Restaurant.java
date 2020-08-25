@@ -43,7 +43,7 @@ public class Restaurant {
 	
 	private Integer isDeleted; // 0: active, 1: deleted
 	
-	
+	// businessHour, holiday, userName 추가해야함
 	
 	
 

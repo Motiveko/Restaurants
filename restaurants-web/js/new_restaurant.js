@@ -24,6 +24,9 @@ $(document).ready(function () {
 
 	// 레스토랑 목록 가져오기, 실행은 index_map에서 하기로, 위치정보 로딩 완료하면 function(lat,lng) 실행
 
+	// 가게 등록폼 관련 이벤트 등록
+	addSubmitForm();
+
 	var centerlat;
 	var centerlng;
 	var map;
@@ -40,6 +43,7 @@ $(document).ready(function () {
 			addClicks(map, centerlat, centerlng);
 			addressClick(map);
 			addSearch(map);
+
 		});
 	});
 
@@ -86,10 +90,10 @@ function morphMap(map, lat, lng) {
 }
 
 // 마커표시
-function renderMarker(map, lat, lng) {
+function renderMarker(map, lat, lng, isBounce) {
 	var marker = new naver.maps.Marker({
 		position: new naver.maps.LatLng(lat, lng),
-		animation: naver.maps.Animation.BOUNCE, // 마커 튀기기
+		animation: (isBounce) ? naver.maps.Animation.BOUNCE : naver.maps.Animation.DROP, // 마커 튀기기
 		map: map
 	});
 	return marker;
@@ -97,7 +101,6 @@ function renderMarker(map, lat, lng) {
 
 // 지도 특정 지점 클릭시 해당지점의 주소 표시	
 function addressClick(map) {
-	initGeocoder()
 	//원래 위치로 이동
 
 	// 기본값
@@ -112,31 +115,80 @@ function addressClick(map) {
 		return mapBounds;
 	}
 
-	// 지도 특정지점 클릭 시 주소,좌표 표시
+
+
+
+
+
+
+}
+// map관련 버튼이벤트 등은 랜더완료한 후에 할당해줘야할듯
+function renderMap(lat, lng, callback) {
+	return new Promise(function (resolve, reject) {
+
+		$("#map").css("display", "block"); // 커스텀
+
+		var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+		var options = { //지도를 생성할 때 필요한 기본 옵션
+			center: new naver.maps.LatLng(lat, lng), //지도의 중심좌표.
+			zoom: 15, //지도의 레벨(확대, 축소 정도),
+			mapTypeId: naver.maps.MapTypeId.NORMAL, // 지도유형
+			zoomControl: true,
+			zoomControlOptions: {
+				style: naver.maps.ZoomControlStyle.SMALL
+			},
+			scaleControl: true, // 줄자(300m,500m, ...)
+			logoControl: false, // 네이버 색깔로고, 못지운다.
+			mapDataControl: false, // 네이버 글자로고
+			mapTypeControl: true, // 위성-일반
+			zoomControl: true,
+			zoomControlOptions: {
+				style: naver.maps.ZoomControlStyle.LARGE,
+			}
+		};
+		map = new naver.maps.Map('map', options); //지도 생성 및 객체 리턴
+		resolve(map);
+	}) // end of renderMap()
+
+}
+// 주소검색,표시
+function addSearch(map) {
+	// 마커, 인포윈도 선언	
+	var marker;
 	var infoWindow = new naver.maps.InfoWindow({
 		anchorSkew: true
 	});
+	initGeocoder();
 
-	// infowindow 클릭하면 사라지게 만들고 싶은데 실패다..
-	// naver.maps.Event.addListener(infoWindow, "open", function (e) {
-	// 	var clickInfoWindow = naver.maps.Event.addListener(infoWindow, "click", function (e) {
-	// 		console.log("click");
-	// 		infoWindow.close();
-	// 		infoWindow.removeListener(clickInfoWindow);
-	// 	})
+	function initGeocoder() {
 
-	// 	var closeInfoWindow = naver.maps.Event.addListener(infoWindow, "close", function (e) {
-	// 		infoWindow.removeListener(clickInfoWindow);
-	// 		infoWindow.removeListener(closeInfoWindow);
-	// 	})
+		if (!map.isStyleMapReady) {
+			return;
+		}
 
-	// 	console.log(clickInfoWindow);
-	// });
+		map.addListener('click', function (e) {
+			searchCoordinateToAddress(e.coord);
+			console.log(e.coord);
+		})
+
+		//주소 검색 form 이벤트
+		$('.searchInput').on('keydown', function (e) {
+
+			if (e.keyCode == 13) {
+				e.preventDefault();
+				$('.searchBtn').click();
+			}
+		})
+
+		$('.searchForm').on('submit', function (e) {
+			e.preventDefault();
+			search($('.searchInput').val());
+		});
+	}
 
 
+	// 지도 클릭으로 infoWindow + Marker 표시
 	function searchCoordinateToAddress(latlng) {
-		console.log("searchCoordinateToAddress");
-
 		infoWindow.close();
 		naver.maps.Service.reverseGeocode({
 			coords: latlng,
@@ -176,12 +228,45 @@ function addressClick(map) {
 				'</div>'
 			].join('\n'));
 
-			infoWindow.open(map, latlng);
+			renderSearchMarker(latlng);
+
+			// 주소 데이터 form에 넘겨주기
+			$("#restaurantAddress").val(address.jibunAddress);
+			infoWindow.open(map, marker);
+			console.log(latlng);
 		});
-
-
 	}
 
+	// 주소검색으로 infoWindow + Marker 표시
+	function search(query) {
+		naver.maps.Service.geocode({
+			query: query
+		}, function (status, response) {
+			if (status !== naver.maps.Service.Status.OK) {
+				return alert('지도API 문제발생');
+			}
+
+
+			var result = response.v2, // 검색 결과의 컨테이너
+				items = result.addresses, // 검색 결과의 배열
+				length = items.length;
+			if (length == 0) return alert("검색어를 확인해주세요");
+			var item = items[0];
+			console.log(item);
+
+			renderSearchMarker(item);
+			searchAddressToCoordinate(item.jibunAddress);
+			// 주소 데이터 form에 넘겨주기
+			$("#restaurantAddress").val(item.jibunAddress);
+
+		});
+
+	}
+	// *************************
+	// 위치검색 helpers
+	// *************************
+
+	// 주소를 받아 3가지 주소로 infoWindow 표시
 	function searchAddressToCoordinate(address) {
 		naver.maps.Service.geocode({
 			query: address
@@ -219,110 +304,75 @@ function addressClick(map) {
 				htmlAddresses.join('<br />'),
 				'</div>'
 			].join('\n'));
-
 			map.setCenter(point);
-			infoWindow.open(map, point);
+			infoWindow.open(map, marker);
 		});
 	}
 
-	function initGeocoder() {
-		if (!map.isStyleMapReady) {
-			return;
+	// 마커 표시
+	function renderSearchMarker(item) {
+		let lat = item.y;
+		let lng = item.x;
+		if (!marker) {
+			marker = renderMarker(map, lat, lng, true);
+		} else {
+			marker.setPosition(new naver.maps.LatLng(item));
 		}
-		map.addListener('click', function (e) {
-			// console.log(e.coord._lat+", "+e.coord._lng );
-			searchCoordinateToAddress(e.coord);
-		})
-		$('#address').on('keydown', function (e) {
-			var keyCode = e.which;
 
-			if (keyCode === 13) { // Enter Key
-				searchAddressToCoordinate($('#address').val());
-			}
-		});
-
-		$('#submit').on('click', function (e) {
-			e.preventDefault();
-
-			searchAddressToCoordinate($('#address').val());
-		});
+		// form에 데이터 넘겨주기
+		$("#lat").val(lat);
+		$("#lng").val(lng);
 	}
 
-
+	// 이거의 역할은 정확히 파악은 안된다. 
 	naver.maps.onJSContentLoaded = initGeocoder;
 	naver.maps.Event.once(map, 'init_stylemap', initGeocoder);
 }
-// map관련 버튼이벤트 등은 랜더완료한 후에 할당해줘야할듯
-function renderMap(lat, lng, callback) {
-	return new Promise(function (resolve, reject) {
 
-		$("#map").css("display", "block"); // 커스텀
 
-		var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-		var options = { //지도를 생성할 때 필요한 기본 옵션
-			center: new naver.maps.LatLng(lat, lng), //지도의 중심좌표.
-			zoom: 15, //지도의 레벨(확대, 축소 정도),
-			mapTypeId: naver.maps.MapTypeId.NORMAL, // 지도유형
-			zoomControl: true,
-			zoomControlOptions: {
-				style: naver.maps.ZoomControlStyle.SMALL
-			},
-			scaleControl: true, // 줄자(300m,500m, ...)
-			logoControl: false, // 네이버 색깔로고, 못지운다.
-			mapDataControl: false, // 네이버 글자로고
-			mapTypeControl: true, // 위성-일반
-			zoomControl: true,
-			zoomControlOptions: {
-				style: naver.maps.ZoomControlStyle.LARGE,
-			}
-		};
-		map = new naver.maps.Map('map', options); //지도 생성 및 객체 리턴
-		resolve(map);
-	}) // end of renderMap()
+function addSubmitForm(){
 
-}
-// 주소검색
-function addSearch(map){
-	var marker;
-	//주소 검색 form 이벤트
-	$('.searchInput').on('keydown', function (e) {
-		if (e.keyCode == 13) {
-			$('.searchBtn').click();
+	$("#backBtn").on("click",function(e){
+		e.preventDefault();
+		window.location.href = "/index.html";
+	});
+
+	$("#actionForm").on("submit",function(e){
+		e.preventDefault();
+		var validation = true;
+		// 이름
+		if($("#restaurantName").val()==""){
+			$("#nameWrap").addClass(" has-error");
+			$("#nameError").css("display","inline");
+			validation=false;
+		}else{	
+			$("#nameWrap").removeClass(" has-error");
+			$("#nameError").css("display","none");
+		} 
+		// 주소
+		if($("#restaurantAddress").val()==""){
+			$("#addressWrap").addClass(" has-error");
+			$("#addressError").css("display","inline");
+			validation=false;
+		}else {
+			$("#addressWrap").removeClass(" has-error");
+			$("#addressError").css("display","none");
 		}
-	})
-	$('.searchForm').on('submit', function () {
-		search($('.searchInput').val());
-	})
-	// query를 검색
-	function search(query) {
-		naver.maps.Service.geocode({
-			query: query
-		}, function (status, response) {
-			if (status !== naver.maps.Service.Status.OK) {
-				return alert('지도API 문제발생');
-			}
-	
-	
-			var result = response.v2, // 검색 결과의 컨테이너
-				items = result.addresses, // 검색 결과의 배열
-				length = items.length;
-			if (length == 0) return alert("검색어를 확인해주세요");
-			var item = items[length - 1];
-			console.log(item);
+		//설명
+		if($("#description").val()==""){
+			$("#descriptionWrap").addClass(" has-error");
+			$("#descriptionError").css("display","inline");
+			validation=false;
+		}else {
+			$("#descriptionWrap").removeClass(" has-error");
+			$("#descriptionError").css("display","none");
+		}
+		if(validation){
+			console.log("통과");
+			var data = $("actionForm").serialize();
+			console.log(data);
+		}
 
-			if(map) {
-				
-				let lat = item.y;
-				let lng = item.x;
-				if(!marker){
-					marker = renderMarker(map, lat, lng);
-				} else{
-					marker.setPosition(new naver.maps.LatLng(lat, lng));
-				}
 
-				morphMap(map,lat,lng);
-			}
-			console.log(result);
-		});
-	}
+	})
 }
