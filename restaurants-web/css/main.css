@@ -1,18 +1,19 @@
-.navbar-brand{
+.navbar-brand {
     padding-top: 0;
     padding-bottom: 0;
 }
-.logo{
+
+.logo {
     margin-top: 10px;
     margin-bottom: auto;
     width: 30px;
     height: 30px;
 }
 
-.profile{
+.profile {
     margin-top: auto;
     margin-bottom: auto;
-    padding-top : 10px;
+    padding-top: 10px;
     width: 30px;
     cursor: pointer;
 }
@@ -24,8 +25,9 @@
 .body_right {
     background-color: blanchedalmond;
 }
+
 #map {
-    
+
     display: block;
     position: absolute;
     width: 100%;
@@ -46,11 +48,49 @@
     margin-top: 14px;
 }
 
+
+.container-fluid {
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+
+
+.content-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 tr {
     cursor: pointer;
 }
 
-.container-fluid{
-    padding-left: 10%;
-    padding-right: 10%;
+table {
+    font-size: 23px;
+    text-align: center;
+    height: 650px;
+}
+
+td {
+    font-size: 22px;
+}
+
+th {
+    text-align: center;
+}
+
+/* 페이징관련 */
+.paging{
+    padding-top: 17px;
+    margin-bottom: 0px;
+}
+.pagination li {
+    cursor: pointer;
 }

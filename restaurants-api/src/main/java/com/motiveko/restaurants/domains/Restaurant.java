@@ -3,7 +3,9 @@ package com.motiveko.restaurants.domains;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,27 +24,38 @@ public class Restaurant {
 	@GeneratedValue
 	private Long id;
 	
-	@NotNull
+	@NotEmpty
 	private String name;
 
-	@NotNull
+	@NotEmpty
 	private String description;
 	
 	// 위치정보
-	@NotNull
+	@NotEmpty
 	private String address;
 	
-	@NotNull
+	@NotEmpty
 	private Double lat;
 	
-	@NotNull
+	@NotEmpty
 	private Double lng;
 	
-	@NotNull
+	@NotEmpty
 	private Integer category;
 	
+	@NotEmpty
+	private Integer startTime;
+	
+	@NotEmpty
+	private Integer endTime;
+	
+	@NotEmpty
+	private String userName;
+	
+	private String holiday;
 	private Integer isDeleted; // 0: active, 1: deleted
 	
+
 	// businessHour, holiday, userName 추가해야함
 	
 	

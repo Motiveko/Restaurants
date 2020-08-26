@@ -1,5 +1,6 @@
 package com.motiveko.restaurants.applications;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -17,11 +18,16 @@ public class RestaurantService {
 		this.restaurantRepository = restaurantRepository;
 	}
 
-	public Restaurant createRestaurant(String name, String desc, Double lat, Double lng, Integer category) {
+	public Restaurant createRestaurant(String name, String desc, Double lat, 
+									Double lng, Integer category, Integer startTime,
+									Integer endTime, String holiday, String userName) {
 		
 		Restaurant restaurant = Restaurant.builder()
 									.name(name).description(desc)
 									.lat(lat).lng(lng).category(category)
+									.startTime(startTime).endTime(endTime)
+									.userName(userName).holiday(holiday)
+									.isDeleted(0)
 									.build();
 		
 		return restaurantRepository.save(restaurant);
@@ -43,6 +49,13 @@ public class RestaurantService {
 		List<Restaurant> restaurants = restaurantRepository.findAll(maxLat,minLat,maxLng,minLng,start, end);
 		
 		return restaurants;
+	}
+
+	public Restaurant getRestaurant(Long restaurantId) {
+		
+		Restaurant restaurant = restaurantRepository.findById(restaurantId).orElse(null);
+		if(restaurant!=null && restaurant.getIsDeleted()==0 ) return restaurant;
+		else return null;
 	}
 
 	

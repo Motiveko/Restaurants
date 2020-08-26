@@ -36,10 +36,10 @@ public class SessionControllerTest {
 		String email = "rhehdrla@naver.com";
 		String password = "1234";
 		
-		mvc.perform(get("/login")
+		mvc.perform(post("/login")
 					.contentType(MediaType.APPLICATION_JSON)
 					.content("{\"email\":\""+email+"\",\"password\":\""+password+"\"}"))
-			.andExpect(status().isOk());
+			.andExpect(status().isCreated());
 		}
 	
 	// 존재하지 않는 email로 로그인시도
@@ -50,7 +50,7 @@ public class SessionControllerTest {
 		
 		String email = "xxx";
 		String password ="1234";
-		mvc.perform(get("/login")
+		mvc.perform(post("/login")
 					.contentType(MediaType.APPLICATION_JSON)
 					.content("{\"email\":\""+email+"\",\"password\":\""+password+"\"}"))
 			.andExpect(status().isBadRequest());
@@ -66,7 +66,7 @@ public class SessionControllerTest {
 		
 		String email = "rhehdrla@naver.com";
 		String password ="xxxx";
-		mvc.perform(get("/login")
+		mvc.perform(post("/login")
 					.contentType(MediaType.APPLICATION_JSON)
 					.content("{\"email\":\""+email+"\",\"password\":\""+password+"\"}"))
 			.andExpect(status().isBadRequest());

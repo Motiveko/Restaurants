@@ -1,6 +1,7 @@
 // import { createPublicKey } from "crypto";
 
-const rootUrl = "http://localhost:8090";
+const apiRootURL = "http://localhost:8090";
+const webRootURL = "http://localhost:3000";
 
 $(document).ready(function () {
 	// 지도 외 일반기능
@@ -39,11 +40,10 @@ $(document).ready(function () {
 		// 맵 로딩 후 랜더링	
 		renderMap(centerlat, centerlng).then(function (res) {
 			map = res;
-			console.log(map);
+
 			addClicks(map, centerlat, centerlng);
 			addressClick(map);
 			addSearch(map);
-
 		});
 	});
 
@@ -168,7 +168,6 @@ function addSearch(map) {
 
 		map.addListener('click', function (e) {
 			searchCoordinateToAddress(e.coord);
-			console.log(e.coord);
 		})
 
 		//주소 검색 form 이벤트
@@ -233,7 +232,6 @@ function addSearch(map) {
 			// 주소 데이터 form에 넘겨주기
 			$("#restaurantAddress").val(address.jibunAddress);
 			infoWindow.open(map, marker);
-			console.log(latlng);
 		});
 	}
 
@@ -333,6 +331,7 @@ function addSearch(map) {
 function addSubmitForm(){
 
 	$("#backBtn").on("click",function(e){
+
 		e.preventDefault();
 		window.location.href = "/index.html";
 	});
@@ -340,6 +339,7 @@ function addSubmitForm(){
 	$("#actionForm").on("submit",function(e){
 		e.preventDefault();
 		var validation = true;
+
 		// 이름
 		if($("#restaurantName").val()==""){
 			$("#nameWrap").addClass(" has-error");
@@ -369,8 +369,32 @@ function addSubmitForm(){
 		}
 		if(validation){
 			console.log("통과");
-			var data = $("actionForm").serialize();
-			console.log(data);
+			var formArray = $("#actionForm").serializeArray();
+			var data = {};
+			$.each(formArray,function(i,v){
+				data[v.name] = v.value;
+			});
+			var string = JSON.stringify(data);
+			console.log(string);
+			$.ajax({
+				url: apiRootURL+"/createRestaurant",
+				method: "POST",
+				contentType: "application/json",
+				data: string,
+				success: function(data, textStatus, jqXHR){
+					console.log(data);
+					if(data.result="SUCCESS"){
+						alert("레스토랑 등록에 성공했습니다.");
+						// 상세페이지로 이동하고싶은데 이거 어떻게 할 지 고민해봐야한다.
+						window.location.href = webRootURL+"/index.html"; 
+					} else{
+						alert("레스토랑 등록에 실패했습니다.");
+					}
+				},
+				error: function(){
+					alert("error occured");
+				}
+			})
 		}
 
 

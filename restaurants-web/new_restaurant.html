@@ -74,21 +74,22 @@
 				<form action="#" id="actionForm" class="form-horizontal">
 					<!-- name, description, category, {businessHour,holiday(추가)}, (address, lat,lng) -->
 					<div class="form-group" id="nameWrap">
-						<label for="name" class="col-sm-2 control-label">식당이름</label>
+						<label for="restaurantName" class="col-sm-2 control-label">식당이름</label>
 						<div class="col-sm-10">
-							<input type="text" id="restaurantName" class="form-control" placeholder="식당이름" />
+							<input type="text" id="restaurantName" name="name" class="form-control" placeholder="식당이름" />
 							<span id="nameError" class="help-block" style="display:none">식당이름을 입력해주세요</span>
 						</div>
 					</div>
 					<div class="form-group" id="addressWrap">
-						<label for="address" class="col-sm-2 control-label">주소</label>
+						<label for="restaurantAddress" class="col-sm-2 control-label">주소</label>
 						<div class="col-sm-10">
-							<input type="text" id="restaurantAddress" class="form-control" placeholder="지도에서 선택해주세요"
-								disabled />
+							<input type="text" id="restaurantAddress" name="address" class="form-control" placeholder="지도에서 선택해주세요"
+							readonly="true" />
 							<span id="addressError" class="help-block" style="display:none">주소를 지도에서 선택해주세요</span>
 
 						</div>
 					</div>
+
 					<div class="form-group">
 						<label for="businessHour" class="col-sm-2 control-label">영업시간</label>
 						<div class="col-sm-4">
@@ -101,17 +102,18 @@
 							</select>
 						</div>
 					</div>
+
 					<div class="form-group">
 						<label for="holiday" class="col-sm-2 control-label">휴무일</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" placeholder="휴무일" />
+							<input type="text" id="holiday" name="holiday" class="form-control" placeholder="휴무일" />
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="category" class="col-sm-2 control-label">구분</label>
 						<div class="col-sm-10">
-							<select class="form-control">
+							<select class="form-control" name="category" id="category">
 								<option value="1">한식</option>
 								<option value="2">양식</option>
 								<option value="3">일식</option>
@@ -131,7 +133,7 @@
 
 					</div>
 					<div class="form-group">
-							<label for="description" class="col-sm-2 control-label">사진</label>
+							<label for="images" class="col-sm-2 control-label">사진</label>
 							<div class="col-sm-10">
 								추후구현
 							</div>
@@ -142,8 +144,8 @@
 						<div class="col-sm-9"></div>
 
 						<div class="col-sm-3">
-								<button id="backBtn" class="btn btn-primary" >목록으로</button>
 								<button type="submit" class="btn btn-success">등록</button>
+								<button id="backBtn" class="btn btn-primary" >목록으로</button>
 						</div>
 
 					</div>
@@ -179,10 +181,10 @@
 	<script>
 		$(document).ready(function(){
 			// 영업시간 24개씩 두개하는게 너무많아서 이렇게표시
-			for( var i = 0; i<=24; i++){
+			for( var i = 0; i<=23; i++){
 				var time = (i>=10) ? i : "0"+i;
 				
-				$("select.time").append(`<option value="${time}:00">${time}:00</option>`);
+				$("select.time").append(`<option value="${i}">${time}시</option>`);
 			}
 		})
 		

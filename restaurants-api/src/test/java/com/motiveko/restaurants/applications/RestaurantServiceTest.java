@@ -39,19 +39,29 @@ public class RestaurantServiceTest {
 		Double lat = 32.1234;
 		Double lng = 33.1234;
 		Integer category = 1;
+		Integer startTime = 8;
+		Integer endTime = 22;
+		String holiday = "일요일";
+		String userName = "motiveko";
 		
 		Restaurant mockRestaurant = Restaurant.builder()
 										.id(id)
 										.name(name)
 										.description(desc)
 										.lat(lat).lng(lng)
-										.category(category).build();
+										.category(category)
+										.startTime(startTime).endTime(endTime)
+										.holiday(holiday).userName(userName).build();
 		
 		given(restaurantRepository.save(any())).willReturn(mockRestaurant);
 		
-		Restaurant restaurant = restaurantService.createRestaurant(name, desc, lat, lng, category);
+		Restaurant restaurant = restaurantService
+									.createRestaurant(
+										name, desc, lat, lng, category,
+										startTime, endTime, holiday, userName);
 		
 		verify(restaurantRepository).save(any());
+		assertThat(restaurant.getUserName(),is(userName));
 		assertThat(restaurant.getLat(),is(lat));
 	}
 	

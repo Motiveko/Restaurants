@@ -13,6 +13,7 @@
     "node": "^14.8.0"
   },
   "devDependencies": {
+    "webpac": "0.0.1-security",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"

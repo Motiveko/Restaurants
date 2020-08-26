@@ -298,7 +298,8 @@ function getRestaurantList(mapBounds, page) {
 	// var jsonData = `{"maxLat":"37.5343707","minLat":"37.5071406","maxLng":"126.9110697","minLng":"126.8896121","page":"1"}`;
 	var jsonData = JSON.stringify(data);
 
-	console.log(data);
+	console.log(jsonData);
+	
 	$.ajax({
 		url: rootUrl+"/getRestaurantList",
 		contentType: "application/json",

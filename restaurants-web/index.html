@@ -38,7 +38,8 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="/">
-					<img class="logo" alt="서울맛집" src="https://cdn3.iconfinder.com/data/icons/street-food-and-food-trucker-1/64/hamburger-fast-food-patty-bread-512.png">
+					<img class="logo" alt="서울맛집" 
+						src="https://cdn3.iconfinder.com/data/icons/street-food-and-food-trucker-1/64/hamburger-fast-food-patty-bread-512.png">
 				</a>
 			</div>
 
@@ -47,7 +48,7 @@
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
 					<li><a href="/new_restaurant.html">맛집등록</a></li>
-				</ul> 
+				</ul>
 				<form class="navbar-form navbar-right">
 					<div class="form-group">
 						<select class="form-control">
@@ -61,7 +62,8 @@
 				</form>
 				<ul class="nav navbar-nav navbar-right">
 					<li>
-						<img class="profile" src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-512.png">					
+						<img class="profile"
+							src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-512.png">
 					</li>
 					<li>
 						<a href="#" id="email">
@@ -77,14 +79,13 @@
 
 
 	<div class="container-fluid">
-
-	<!-- 
+		<!-- 
 		<div class="row header">
 			여기는 해더입니다.
 		</div>
 	-->
-		<div class="row">
-			<div class="col-md-6">
+		<div class="row h-100 content-wrap">
+			<div class="col-md-6 left-content">
 				<table class="table table-hover restaurandList">
 					<tr>
 						<th>순번</th>
@@ -153,14 +154,28 @@
 						<td>카페</td>
 					</tr>
 				</table>
-				<nav aria-label="...">
-						<ul class="pagination">
-						  <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
-						  <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-
-						</ul>
+				<nav  aria-label="...">
+					<ul class="pagination paging" >
+						<li class="disabled" page="1" >
+							<span>
+								<span aria-hidden="true">&laquo;</span>
+							</span>
+						</li>
+						<li class="active" page="1">
+							<span>1 <span class="sr-only">(current)</span></span>
+						</li>
+						<li class="" page="2">
+							<span>2</span>
+						</li>
+						<li class="">
+							<span>
+								<span aria-hidden="true">&raquo;</span>
+							</span>
+						</li>
+					</ul>
 				</nav>
 			</div>
+
 			<div class="col-md-6">
 				<!-- map resolved -->
 				<div>
