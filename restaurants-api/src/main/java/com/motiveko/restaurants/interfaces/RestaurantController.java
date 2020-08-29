@@ -59,13 +59,35 @@ public class RestaurantController {
 		return  ResponseEntity.status(201).body(mapper.writeValueAsString(modelMap));
 	}
 	
+	// 현재 범위 내 레스토랑 총 갯수
+	@GetMapping("/getRestaurantCount")
+	public String getRestaurantCount( @RequestParam HashMap<String, String> resources) throws JsonProcessingException {
+		
+		ObjectMapper mapper = new ObjectMapper();
+		Map<String, Object> modelMap = new HashMap<>();
+		System.out.println(resources);
+		long totalCount = restaurantService.getRestaurantCount(resources);
+
+
+		if( totalCount == 0 ) {
+			// 레스토랑 없음
+			modelMap.put("result", "FAILED");
+		} else {
+			long lastPage = (totalCount%10 ==0) ? totalCount/10 : (totalCount/10) +1;
+			modelMap.put("result","SUCCESS");
+			modelMap.put("lastPage",lastPage);
+		}
+
+		return mapper.writeValueAsString(modelMap);
+	}
+	
 	// 조회(그냥), 조회(검색)
 	@GetMapping("/getRestaurantList")
 	public String getRestaurantList( @RequestParam HashMap<String, String> resources) throws JsonProcessingException {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> modelMap = new HashMap<String, Object>();
-		System.out.println("Resources : "+resources);
+		System.out.println(resources);
 		
 		List<Restaurant> list = restaurantService.getRestaurantList(resources);
 		modelMap.put("list", list);
@@ -73,7 +95,7 @@ public class RestaurantController {
 		System.out.println(mapper.writeValueAsString(modelMap));
 		return mapper.writeValueAsString(modelMap);
 	}
-	
+
 	// 상제 조회
 	@GetMapping("/getRestaurant/{id}")
 	public String getRestaurant(@PathVariable("id") Long restaurantId) throws JsonProcessingException {

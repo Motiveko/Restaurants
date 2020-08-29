@@ -58,5 +58,15 @@ public class RestaurantService {
 		else return null;
 	}
 
+	public long getRestaurantCount(HashMap<String, String> resources) {
+		Double maxLat = Double.parseDouble(resources.get("maxLat"));
+		Double minLat = Double.parseDouble(resources.get("minLat"));
+		Double maxLng = Double.parseDouble(resources.get("maxLng"));
+		Double minLng = Double.parseDouble(resources.get("minLng"));
+		
+		System.out.println("이제 JPA실행합니다");
+		return restaurantRepository.count(minLat,maxLat,minLng,maxLng);
+	}
+
 	
 }

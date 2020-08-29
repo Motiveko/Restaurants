@@ -26,4 +26,13 @@ public interface RestaurantRepository extends CrudRepository<Restaurant, Long>{
 							@Param("start")Integer start,
 							@Param("end")Integer end);
 
+	@Query( value="select count(*) from restaurant\n" + 
+			"where lat between :minLat AND :maxLat AND lng BETWEEN :minLng AND :maxLng"
+			, nativeQuery = true)
+	Long count(@Param("minLat")Double minLat, 
+			@Param("maxLat")Double maxLat, 
+			@Param("minLng")Double minLng, 
+			@Param("maxLng")Double maxLng);
+
+
 }

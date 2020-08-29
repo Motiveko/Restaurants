@@ -83,9 +83,34 @@ public class RestaurantControllerTest {
 	}
 	
 	@Test
+	public void getRestaurantCountWithoutRestaurant() throws Exception {
+		
+		given(restaurantService.getRestaurantCount(any())).willReturn(0L);
+		mvc.perform(get("/getRestaurantCount")
+					.content("{\"maxLat\":37.5343707,\"minLat\":37.5071406,\"maxLng\":126.9110697,\"minLng\":126.8896121,\"page\":1}"))
+				.andExpect(status().isOk())
+				.andExpect(content().string(containsString("FAILED")));
+		
+		verify(restaurantService).getRestaurantCount(any());
+		
+	}
+	@Test
+	public void getRestaurantCountWithRestaurant() throws Exception {
+		
+		given(restaurantService.getRestaurantCount(any())).willReturn(100L);
+		mvc.perform(get("/getRestaurantCount")
+					.content("{\"maxLat\":37.5343707,\"minLat\":37.5071406,\"maxLng\":126.9110697,\"minLng\":126.8896121,\"page\":1}"))
+				.andExpect(status().isOk())
+				.andExpect(content().string(containsString("SUCCESS")));
+		
+		verify(restaurantService).getRestaurantCount(any());
+		
+	}
+	
+	@Test
 	public void getRestaurantList() throws Exception {
 		mvc.perform(get("/getRestaurantList")
-					.contentType(MediaType.APPLICATION_JSON)
+					.contentType(MediaType.APPLICATION_JSON) // GET Mapping으로 RequestParam으루 받는거는없어두된다.
 					.content("{\"maxLat\":37.5343707,\"minLat\":37.5071406,\"maxLng\":126.9110697,\"minLng\":126.8896121,\"page\":1}"))
 			.andExpect(status().isOk());
 		

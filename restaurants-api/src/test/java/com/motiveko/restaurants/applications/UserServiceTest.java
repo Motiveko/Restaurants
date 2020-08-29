@@ -1,4 +1,4 @@
-package com.motiveko.restaurants.applictaions;
+package com.motiveko.restaurants.applications;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.ArgumentMatchers.any;
