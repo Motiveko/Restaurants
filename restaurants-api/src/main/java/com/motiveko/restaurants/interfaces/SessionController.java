@@ -42,6 +42,7 @@ public class SessionController {
 			session.setAttribute("sEmail", user.getEmail());
 			session.setAttribute("sName", user.getName());
 			session.setAttribute("sLevel", user.getLevel());
+			System.out.println("session에 할당완료");
 		}
 		System.out.println("성공이쥬?");
 
@@ -54,11 +55,14 @@ public class SessionController {
 				
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> modelMap = new HashMap<>();
-		
-		if(session==null) {
+		System.out.println(session.getAttribute("sEmail"));
+		if(session.getAttribute("sEmail")==null) {
 			modelMap.put("result", "FAILED");
 			
-		} else modelMap.put("result", "SUCCESS");
+		} else {
+			modelMap.put("result", "SUCCESS");
+			modelMap.put("email", session.getAttribute("sEmail"));
+		}
 		
 		return mapper.writeValueAsString(modelMap);
 	}

@@ -18,13 +18,71 @@
 		src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ddrgm7aolc&submodules=geocoder"></script>
 
 	<link rel="stylesheet" href="./css/main.css">
-
+	<link rel="stylesheet" href="./css/main_popup.css">
 	<title>EatGo</title>
 </head>
 
 <body>
 
+	<div class="popUp">
+		<div class="popUp_bg"></div>
 
+		<div class="popUp_content">
+
+			<div class="panel panel-primary">
+				<div class="panel-heading name">
+					<h4>까치네김밥</h4>
+				</div>
+			</div>
+
+
+			<div class="popUp_map">
+				<!-- 여기에 지도 표시 -->
+			</div>
+
+
+			<div class="panel panel-info">
+				<div class="panel-heading">소개</div>
+				<div class="panel-body description">
+					영등포구청 역 앞 제육볶음이 맛있는 까치네김밥 입니다.
+				</div>
+			</div>
+			<div class="panel panel-info">
+					<div class="panel-heading">평점</div>
+					<div class="panel-body average-score">4.8</div>
+			</div>
+			<div class="panel panel-info">
+				<div class="panel-heading">주소</div>
+				<div class="panel-body address">서울특별시 영등포구 당산동 1-3</div>
+			</div>
+			<div class="panel panel-info">
+				<div class="panel-heading">분류</div>
+				<div class="panel-body category">분식</div>
+			</div>
+			<div class="panel panel-info">
+				<div class="panel-heading menu-header">
+					메뉴
+					<span class="badge menu-badge">27</span>
+					<img class="menuicon" src="./src/images/common/menu.png">
+				</div>
+				<div class="panel-body menu">
+					메뉴는 header누르면 펼치기
+					메뉴는 grid로 3분할로 표시하는게 어떨런지..?
+				</div>
+			</div>
+			<div class="panel panel-info">
+					<div class="panel-heading review-header">
+						리뷰
+						<span class="badge review-badge">5</span>
+						<img class="menuicon" src="./src/images/common/menu.png">
+					</div>
+					<!-- <div class="panel-body review">
+						리뷰도 header누르면 펼치기
+					</div> -->
+			</div>
+
+		</div>
+	</div>
 	<!-- NAV BAR-->
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
@@ -66,9 +124,9 @@
 							src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-512.png">
 					</li>
 					<li>
-						<a href="#" id="email">
+						<a href="#" id="userEmail">
 							<!-- <span class="profile_wrap"> </span> -->
-							rhehdrla@naver.com
+							<!-- rhehdrla@naver.com -->
 						</a>
 					</li>
 
@@ -84,86 +142,32 @@
 			여기는 해더입니다.
 		</div>
 	-->
+
 		<div class="row h-100 content-wrap">
 			<div class="col-md-6 left-content">
 				<table class="table table-hover restaurandList">
-					<tr>
+					<thead>
 						<th>순번</th>
 						<th>이름</th>
 						<th>주소</th>
-						<th>구분</th>
-					</tr>
-					<tr restaurantId="1">
-						<td>1</td>
-						<td>테스트밥집</td>
-						<td>영등포구 영신로 193</td>
-						<td>한식</td>
-					</tr>
-					<tr restaurantId="2">
-						<td>2</td>
-						<td>테스트커피집</td>
-						<td>영등포구 당산동</td>
-						<td>카페</td>
-					</tr>
-					<tr restaurantId="3">
-						<td>3</td>
-						<td>테스트 파스타</td>
-						<td>영등포구 독산동</td>
-						<td>양식</td>
-					</tr>
-					<tr restaurantId="4">
-						<td>4</td>
-						<td>테스트 떡볶이</td>
-						<td>영등포구 신정동</td>
-						<td>분식</td>
-					</tr>
-					<tr restaurantId="5">
-						<td>5</td>
-						<td>테스트커피집</td>
-						<td>영등포구 당산동</td>
-						<td>카페</td>
-					</tr>
-					<tr restaurantId="6">
-						<td>6</td>
-						<td>테스트커피집</td>
-						<td>영등포구 당산동</td>
-						<td>카페</td>
-					</tr>
-					<tr restaurantId="7">
-						<td>7</td>
-						<td>테스트커피집</td>
-						<td>영등포구 당산동</td>
-						<td>카페</td>
-					</tr>
-					<tr restaurantId="8">
-						<td>8</td>
-						<td>테스트커피집</td>
-						<td>영등포구 당산동</td>
-						<td>카페</td>
-					</tr>
-					<tr restaurantId="9">
-						<td>9</td>
-						<td>테스트커피집</td>
-						<td>영등포구 당산동</td>
-						<td>카페</td>
-					</tr>
-					<tr restaurantId="10">
-						<td>10</td>
-						<td>테스트커피집</td>
-						<td>영등포구 당산동</td>
-						<td>카페</td>
-					</tr>
+						<th>카테고리</th>
+					</thead>
+					<tbody class="restaurants">
+
+
+					</tbody>
+
 				</table>
-				<nav  aria-label="...">
-					<ul class="pagination paging" >
-						<li class="disabled" page="1" >
+				<nav aria-label="...">
+					<ul class="pagination paging">
+						<li class="firstBtn disabled" page="1">
 							<span>
 								<span aria-hidden="true">&laquo;</span>
 							</span>
 						</li>
 					</ul>
-					<ul class="pagination paging centerPaging" >
-					<!-- 						
+					<ul class="pagination paging centerPaging">
+						<!-- 						
 						<li class="active" page="1">
 							<span>1 </span>
 						</li>
@@ -184,9 +188,9 @@
 						</li>
 					 -->
 					</ul>
-					<ul class="pagination paging" >
+					<ul class="pagination paging">
 
-						<li class="lastBtn">
+						<li class="lastBtn" page="">
 							<span>
 								<span aria-hidden="true">&raquo;</span>
 							</span>

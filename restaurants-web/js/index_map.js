@@ -1,6 +1,7 @@
 // import { createPublicKey } from "crypto";
 
 const rootApiUrl = "http://localhost:8090";
+var markerList = [];
 
 $(document).ready(function () {
 	// 지도 외 일반기능
@@ -13,18 +14,16 @@ $(document).ready(function () {
 		success: function (res) {
 			if (res.result == "SUCCESS") {
 				console.log("Valid User!");
+				$("#userEmail").text(res.email);
 			} else {
-				window.location.href = "/login.html";
+				console.log("사용자 인증 실패..");
+				// window.location.href = "/login.html";
 			}
 		},
 		error: function () {
 			console.log("error occured");
 		}
 	})
-
-	// 레스토랑 목록 가져오기, 실행은 index_map에서 하기로, 위치정보 로딩 완료하면 function(lat,lng) 실행
-
-
 
 	var lat;
 	var lng;
@@ -36,9 +35,15 @@ $(document).ready(function () {
 		map = renderMap(lat, lng);
 		addMorphBtnEvent(map,lat,lng);
 		addRefreshEvent(map);
+		
 	});
 })
 
+
+// ************************************************************
+// ************************************************************
+
+// 사용자 위치정보 로딩	
 function getGeoData(callback) {
 	return new Promise(function (resolve, reject) {
 
@@ -56,7 +61,7 @@ function getGeoData(callback) {
 }
 
 
-// map관련 버튼이벤트 등은 랜더완료한 후에 할당해줘야할듯
+// 맵 랜더링	
 function renderMap(lat, lng) {
 	$("#map").css("display", "block"); // 커스텀
 
@@ -78,7 +83,13 @@ function renderMap(lat, lng) {
 			style: naver.maps.ZoomControlStyle.LARGE,
 		}
 	};
-	return new naver.maps.Map('map', options); //지도 생성 및 객체 리턴
+	var map = new naver.maps.Map('map', options); //지도 생성 및 객체 리턴
+
+	// 최초 map 랜더링 시 로딩하기
+	var mapBounds = map.getBounds();
+	getRestaurantCount(mapBounds);
+	getRestaurantList(map, mapBounds, 1);
+	return map;
 	// renderMarker(map, lat, lng)
 }
 
@@ -88,29 +99,28 @@ function addMorphBtnEvent(map,lat,lng){
 	$(".morphBtn").on("click", function () {
 		console.log("clicked");
 		morphMap(map, lat, lng);
+
+
 	});
 }
 function addRefreshEvent(map){
 	$(".refreshBtn").off(); // 기존이벤트 제거
 	$(".refreshBtn").on("click", function () {
-		// TODO : 맵이 현재 표시중인 곳에서 가게정보 다시로딩하게 만들기	
+		// TODO : 맵이 현재 표시중인 곳에서 가게정보 다시로딩하게 만들기
+		console.log(markerList);
+		map.refresh();
+		// 현재 맵에 마커 제거
+		removeMarker(); 
+		
 		var mapBounds = map.getBounds();
 		getRestaurantCount(mapBounds);
-		getRestaurantList(mapBounds, 1);
-		// map.refresh();
+		getRestaurantList(map, mapBounds, 1);
 	});
 }
 
 // 맵 기능들	
 
-function renderMarker(map, lat, lng) {
-	var marker = new naver.maps.Marker({
-		position: new naver.maps.LatLng(lat, lng),
-		animation: naver.maps.Animation.BOUNCE, // 마커 튀기기
-		map: map
-	});
 
-}
 // latlng으로 맵 이동	
 function morphMap(map, lat, lng) {
 	var center = new naver.maps.LatLng(lat, lng);
@@ -121,13 +131,10 @@ function morphMap(map, lat, lng) {
 // 일반기능들..
 
 $(".restaurandList").on('click', 'tr', function (e) {
-
 	var restaurantId = $(this).attr("restaurantId");
-	console.log(restaurantId);
-	console.log(e);
-
 	// TODO : 레스토랑 상세정보 팝업	
-
+	console.log(restaurantId);
+	
 })
 function getRestaurantCount(mapBounds){
 	var data = {
@@ -145,6 +152,8 @@ function getRestaurantCount(mapBounds){
 		dataType: "json",
 		data: data,
 		success: function(res){
+			console.log("getRestaurantCount :::: ")
+			console.log(res);
 			if( res.result=="FAILED") alert("현재 위치에 맛집이 없습니다.");
 			else {
 				var lastPage = res.lastPage;
@@ -160,7 +169,7 @@ function getRestaurantCount(mapBounds){
 }
 
 // 백엔드에서 현재 맵 범위 안에 page번호의 레스토랑 목록 가져오기
-function getRestaurantList(mapBounds, page) {
+function getRestaurantList(map, mapBounds, page) {
 
 	var data = {
 		"maxLat": String(mapBounds._max._lat),
@@ -183,7 +192,11 @@ function getRestaurantList(mapBounds, page) {
 			if(page<=3) startNum = 1;
 			else startNum = page-2;
 			var lastPage = $(".lastBtn").attr("page");
+			// 페이징 표시
 			renderPagingBtn(startNum, page, lastPage);
+			renderRestaurants(map,res);
+			// 레스토랑 목록 표시
+			return res;
 		},
 		error: function () {
 			alert("실패");
@@ -191,7 +204,7 @@ function getRestaurantList(mapBounds, page) {
 	})
 }
 
-
+// 현재 페이지를 토대로 페이지 버튼 랜더링
 function renderPagingBtn(startNum, activeNum, lastPage){
 	// startNum : 표시할 첫번째 번호
 	// lastNum : 페이징의 마지막번호
@@ -216,3 +229,49 @@ function renderPagingBtn(startNum, activeNum, lastPage){
 	$(".centerPaging").html(pagingBtn);
 
 }
+
+function renderRestaurants(map, res){
+	console.log(res);
+	var list = res.list;
+	var i = 0;
+	var alphabet = ['A','B','C','D','E','F','G','H','I','J'];
+	var content = "";
+	for( i; i<list.length; i++){
+		var restaurant = list[i];
+		content += `<tr restaurantId=${restaurant.id}><td>${alphabet[i]}</td><td>${restaurant.name}</td>
+		<td>${restaurant.address}</td><td>${restaurant.category}</td></tr>`
+		renderMarker(map, restaurant.lat, restaurant.lng, i+1);
+	}
+	$(`.restaurants`).html(content);
+
+}
+// 맵에 마커 표시	
+function renderMarker(map, lat, lng, index) {
+
+	var icon = {
+		url: `./src/images/alphabet/${index}.png`,
+		scaledSize: new naver.maps.Size(30, 30),
+		origin: new naver.maps.Point(0, 0),
+		anchor: new naver.maps.Point(25, 26)
+	};
+
+	var marker = new naver.maps.Marker({
+		map: map,
+		position: new naver.maps.LatLng(lat, lng),
+		animation: naver.maps.Animation.BOUNCE, // 마커 튀기기
+		icon: icon
+	});
+
+	console.log(marker);
+
+	markerList.push(marker);
+	return marker;
+}
+
+// 맵에 있는 마커 제거
+function removeMarker(){
+	// for( var m in markerList) m.setMap(null); // 이거는 안되는데 아래는 된다. 시바..?;;
+	for( var i=0; i<markerList.length; i++) markerList[i].setMap(null);
+}
+
+
