@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<!-- JQuery -->
+	<script type="text/javascript" src="./js/jquery-3.5.1.min.js"></script>
+	<!-- BootStrap -->
+	<link rel="stylesheet" href="./css/bootstrap.min.css"
+		integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+	<script type="text/javascript" src="./js/bootstrap.min.js"></script>
+	<!-- Naver Maps-->
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ddrgm7aolc">
+	</script>
+
+	<!-- Geocode API, Sub Module -->
+	<script type="text/javascript"
+		src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ddrgm7aolc&submodules=geocoder"></script>
+
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/main_popup.css">
+	<title>EatGo</title>
+</head>
+
+<body>
+
+	<div class="popUp">
+		<div class="popUp_bg"></div>
+
+		<div class="popUp_content">
+
+			<div class="panel panel-primary">
+				<div class="panel-heading name">
+					<h4>까치네김밥</h4>
+				</div>
+			</div>
+
+
+			<div class="popUp_map">
+				<!-- 여기에 지도 표시 -->
+			</div>
+
+
+			<div class="panel panel-info">
+				<div class="panel-heading">소개</div>
+				<div class="panel-body description">
+					영등포구청 역 앞 제육볶음이 맛있는 까치네김밥 입니다.
+				</div>
+			</div>
+			<div class="panel panel-info">
+					<div class="panel-heading">평점</div>
+					<div class="panel-body average-score">4.8</div>
+			</div>
+			<div class="panel panel-info">
+				<div class="panel-heading">주소</div>
+				<div class="panel-body address">서울특별시 영등포구 당산동 1-3</div>
+			</div>
+			<div class="panel panel-info">
+				<div class="panel-heading">분류</div>
+				<div class="panel-body category">분식</div>
+			</div>
+			<div class="panel panel-info">
+				<div class="panel-heading menu-header">
+					메뉴
+					<span class="badge menu-badge">27</span>
+					<img class="menuicon" src="./src/images/common/menu.png">
+				</div>
+				<div class="panel-body menu">
+					메뉴는 header누르면 펼치기
+					메뉴는 grid로 3분할로 표시하는게 어떨런지..?
+				</div>
+			</div>
+			<div class="panel panel-info">
+					<div class="panel-heading review-header">
+						리뷰
+						<span class="badge review-badge">5</span>
+						<img class="menuicon" src="./src/images/common/menu.png">
+					</div>
+					<!-- <div class="panel-body review">
+						리뷰도 header누르면 펼치기
+					</div> -->
+			</div>
+
+		</div>
+	</div>
+	<!-- NAV BAR-->
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">
+					<img class="logo" alt="서울맛집" 
+						src="https://cdn3.iconfinder.com/data/icons/street-food-and-food-trucker-1/64/hamburger-fast-food-patty-bread-512.png">
+				</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+					<li><a href="/new_restaurant.html">맛집등록</a></li>
+				</ul>
+				<form class="navbar-form navbar-right">
+					<div class="form-group">
+						<select class="form-control">
+							<option value="1">위치</option>
+							<option value="2">이름</option>
+						</select>
+
+						<input type="text" class="form-control" placeholder="Search">
+					</div>
+					<button type="submit" class="btn btn-default">검색</button>
+				</form>
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<img class="profile"
+							src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-512.png">
+					</li>
+					<li>
+						<a href="#" id="userEmail">
+							<!-- <span class="profile_wrap"> </span> -->
+							<!-- rhehdrla@naver.com -->
+						</a>
+					</li>
+
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
+
+
+	<div class="container-fluid">
+		<!-- 
+		<div class="row header">
+			여기는 해더입니다.
+		</div>
+	-->
+
+		<div class="row h-100 content-wrap">
+			<div class="col-md-6 left-content">
+				<table class="table table-hover restaurandList">
+					<thead>
+						<th>순번</th>
+						<th>이름</th>
+						<th>주소</th>
+						<th>카테고리</th>
+					</thead>
+					<tbody class="restaurants">
+
+
+					</tbody>
+
+				</table>
+				<nav aria-label="...">
+					<ul class="pagination paging">
+						<li class="firstBtn disabled" page="1">
+							<span>
+								<span aria-hidden="true">&laquo;</span>
+							</span>
+						</li>
+					</ul>
+					<ul class="pagination paging centerPaging">
+						<!-- 						
+						<li class="active" page="1">
+							<span>1 </span>
+						</li>
+						<li  page="2">
+							<span >2</span>
+						</li>
+						<li  page="3">
+							<span >3</span>
+						</li>
+						<li  page="4">
+							<span >4</span>
+						</li>
+						<li  page="5">
+							<span >5</span>
+						</li>
+						<li class="" page="6">
+							<span>...</span>
+						</li>
+					 -->
+					</ul>
+					<ul class="pagination paging">
+
+						<li class="lastBtn" page="">
+							<span>
+								<span aria-hidden="true">&raquo;</span>
+							</span>
+						</li>
+					</ul>
+				</nav>
+			</div>
+
+			<div class="col-md-6">
+				<!-- map resolved -->
+				<div>
+
+					<div id="map" class=""></div>
+					<p class="btn_wrap">
+						<button class="btn btn-default morphBtn">내위치로</button>
+						<button class="btn btn-default refreshBtn">여기맛집찾기</button>
+					</p>
+					<!-- <form action="#" class="form-inline">
+						<input type="text" id="address" class="form-control" placeholder="주소를 입력하세요.">
+						<button type="submit" id="submit" class="btn btn-primary">검색</button>
+					</form> -->
+				</div>
+			</div>
+		</div>
+		<hr>
+	</div>
+
+
+	<!-- dev-server가 index.js를 main.js로 바꿔준다!? -->
+	<script src="./js/index_map.js"></script>
+	<script src="./main.js"></script>
+
+</body>
+
+</html>
