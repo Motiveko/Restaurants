@@ -51,10 +51,10 @@ const frontRoot = "http://localhost:3000";
 				success: function (data,textStatus,jqXHR) {
 					// res로 넘어오는것은 http response의 body부분이다.
 					// console.log(res);
-					console.log(data); // request body
-					console.log(textStatus); //success?
-					console.log(jqXHR); // 각종 정보
-					window.location.href = frontRoot;
+					console.log(jqXHR);
+					console.log(jqXHR.getAllResponseHeaders()); // 각종 정보
+					console.log(jqXHR.getResponseHeader());
+					// window.location.href = frontRoot;
 				},
 				error: function () {
 					console.log("실패");
