@@ -1,4 +1,4 @@
-const frontRoot = "http://localhost:3000";
+const rootUrl = "http://localhost:8090";
 (function ($) {
 	"use strict";
 
@@ -49,12 +49,14 @@ const frontRoot = "http://localhost:3000";
 				// dataType: "json",
 				data: string,
 				success: function (data,textStatus,jqXHR) {
+					console.log("data");
+					window.location.href = "/index";
 					// res로 넘어오는것은 http response의 body부분이다.
 					// console.log(res);
-					console.log(jqXHR);
-					console.log(jqXHR.getAllResponseHeaders()); // 각종 정보
-					console.log(jqXHR.getResponseHeader());
-					// window.location.href = frontRoot;
+					// console.log(jqXHR);
+					// console.log(jqXHR.getAllResponseHeaders()); // 각종 정보
+					// console.log(jqXHR.getResponseHeader());
+					// window.location.href = rootUrl + "/login";
 				},
 				error: function () {
 					console.log("실패");

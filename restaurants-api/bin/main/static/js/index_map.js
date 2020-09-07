@@ -7,23 +7,26 @@ $(document).ready(function () {
 	// 지도 외 일반기능
 
 	// Session 검증
-	$.ajax({
-		url: "http://localhost:8090/authentication",
-		method: "GET",
-		dataType: "json",
-		success: function (res) {
-			if (res.result == "SUCCESS") {
-				console.log("Valid User!");
-				$("#userEmail").text(res.email);
-			} else {
-				console.log("사용자 인증 실패..");
-				// window.location.href = "/login.html";
-			}
-		},
-		error: function () {
-			console.log("error occured");
-		}
-	})
+	// $.ajax({
+	// 	url: "/authentication",
+	// 	method: "GET",
+	// 	dataType: "json",
+	// 	success: function (res) {
+	// 		console.log(res);
+	// 		if (res.result == "SUCCESS") {
+	// 			console.log("Valid User!");
+	// 			$("#userEmail").text(res.email);
+				
+	// 		} else {
+	// 			console.log("사용자 인증 실패..");
+	// 			window.location.href = "/login";
+	// 		}
+	// 	},
+	// 	error: function () {
+	// 		console.log("error occured");
+	// 		window.location.href = "/login";
+	// 	}
+	// })
 
 	var lat;
 	var lng;
@@ -35,7 +38,7 @@ $(document).ready(function () {
 		map = renderMap(lat, lng);
 		addMorphBtnEvent(map,lat,lng);
 		addRefreshEvent(map);
-		
+
 	});
 })
 
@@ -134,8 +137,8 @@ $(".restaurandList").on('click', 'tr', function (e) {
 	var restaurantId = $(this).attr("restaurantId");
 	// TODO : 레스토랑 상세정보 팝업	
 	console.log(restaurantId);
-	
 })
+
 function getRestaurantCount(mapBounds){
 	var data = {
 		"maxLat": String(mapBounds._max._lat),

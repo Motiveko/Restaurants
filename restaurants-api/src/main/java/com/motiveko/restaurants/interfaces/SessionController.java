@@ -32,7 +32,6 @@ public class SessionController {
 	public ResponseEntity<?> login(@RequestBody SessionRequestDto resource
 						,HttpSession session
 						) throws Throwable {
-		System.out.println("로그인시도");
 		String email = resource.getEmail();
 		String password = resource.getPassword();
 		User user = userService.authenticate(email,password);
@@ -44,10 +43,9 @@ public class SessionController {
 			session.setAttribute("sLevel", user.getLevel());
 			System.out.println("session에 할당완료");
 		}
-		System.out.println("성공이쥬?");
 
 		// ajax 에서 success로 걸리려면 .ok여야한다. .created는 error로 가버린다
-		return ResponseEntity.created(new URI("/index.html")).body("{\"result\":\"success!		\"}");
+		return ResponseEntity.created(new URI("/index")).body("{\"result\":\"success\"}");
 	}
 	
 	@GetMapping("/authentication")
@@ -66,5 +64,6 @@ public class SessionController {
 		
 		return mapper.writeValueAsString(modelMap);
 	}
+	
 	
 }
