@@ -4,24 +4,7 @@ const apiRootURL = "http://localhost:8090";
 const webRootURL = "http://localhost:3000";
 
 $(document).ready(function () {
-	// 지도 외 일반기능
 
-	// Session 검증
-	$.ajax({
-		url: "http://localhost:8090/authentication",
-		method: "GET",
-		dataType: "json",
-		success: function (res) {
-			if (res.result == "SUCCESS") {
-				console.log("Valid User!");
-			} else {
-				window.location.href = "/login.html";
-			}
-		},
-		error: function () {
-			console.log("error occured");
-		}
-	})
 
 	// 레스토랑 목록 가져오기, 실행은 index_map에서 하기로, 위치정보 로딩 완료하면 function(lat,lng) 실행
 
@@ -386,7 +369,7 @@ function addSubmitForm(){
 					if(data.result="SUCCESS"){
 						alert("레스토랑 등록에 성공했습니다.");
 						// 상세페이지로 이동하고싶은데 이거 어떻게 할 지 고민해봐야한다.
-						window.location.href = webRootURL+"/index.html"; 
+						window.location.href = "/"; 
 					} else{
 						alert("레스토랑 등록에 실패했습니다.");
 					}

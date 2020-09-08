@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.motiveko.restaurants.aop.CheckValidUser;
 
@@ -12,10 +13,17 @@ import com.motiveko.restaurants.aop.CheckValidUser;
 public class ViewController {
 
 
-	@GetMapping("/index")
-	public String index() {
-		return "index";
+	@GetMapping("/")
+	public ModelAndView index() {
+		ModelAndView mav = new ModelAndView("index");
+		return mav;
 	}
+	@GetMapping("/new_restaurant")
+	public ModelAndView newRestaurant() {
+		ModelAndView mav = new ModelAndView("new_restaurant");
+		return mav;
+	}
+	
 	
 	@GetMapping("/login")
 	
@@ -23,10 +31,7 @@ public class ViewController {
 		if(session.getAttribute("sEmail")!=null) return "index";
 		return "login";
 	}
-	@GetMapping("/forgotPassword")
-	public String loginForgotPassword() {
-		return "forgot_password";
-	}
+
 	@GetMapping("/registerUser")
 	public String loginRegisterUser() {
 		return "register";

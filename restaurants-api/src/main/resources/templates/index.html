@@ -29,56 +29,89 @@
 
 		<div class="popUp_content">
 
-			<div class="panel panel-primary">
+			<div class="panel panel-primary popUp_header">
 				<div class="panel-heading name">
 					<h4>까치네김밥</h4>
 				</div>
 			</div>
+			<div class="popUp_body">
 
-
-			<div class="popUp_map">
-				<!-- 여기에 지도 표시 -->
-			</div>
-
-
-			<div class="panel panel-info">
-				<div class="panel-heading">소개</div>
-				<div class="panel-body description">
-					영등포구청 역 앞 제육볶음이 맛있는 까치네김밥 입니다.
+				<div class="popUp_map">
+					<!-- 여기에 지도 표시 -->
 				</div>
-			</div>
-			<div class="panel panel-info">
+	
+	
+				<div class="panel panel-info">
+					<div class="panel-heading">소개</div>
+					<div class="panel-body description">
+						영등포구청 역 앞 제육볶음이 맛있는 까치네김밥 입니다.
+					</div>
+				</div>
+				<div class="panel panel-info">
 					<div class="panel-heading">평점</div>
 					<div class="panel-body average-score">4.8</div>
-			</div>
-			<div class="panel panel-info">
-				<div class="panel-heading">주소</div>
-				<div class="panel-body address">서울특별시 영등포구 당산동 1-3</div>
-			</div>
-			<div class="panel panel-info">
-				<div class="panel-heading">분류</div>
-				<div class="panel-body category">분식</div>
-			</div>
-			<div class="panel panel-info">
-				<div class="panel-heading menu-header">
-					메뉴
-					<span class="badge menu-badge">27</span>
-					<img class="menuicon" src="./src/images/common/menu.png">
 				</div>
-				<div class="panel-body menu">
-					메뉴는 header누르면 펼치기
-					메뉴는 grid로 3분할로 표시하는게 어떨런지..?
+				<div class="panel panel-info">
+					<div class="panel-heading">주소</div>
+					<div class="panel-body address">서울특별시 영등포구 당산동 1-3</div>
 				</div>
-			</div>
-			<div class="panel panel-info">
-					<div class="panel-heading review-header">
-						리뷰
-						<span class="badge review-badge">5</span>
+				<div class="panel panel-info">
+					<div class="panel-heading">분류</div>
+					<div class="panel-body category">분식</div>
+				</div>
+				<div class="panel panel-info">
+					<div class="panel-heading menu-header">
+						메뉴
+						<span class="badge menu-badge">27</span>
 						<img class="menuicon" src="./src/images/common/menu.png">
 					</div>
-					<!-- <div class="panel-body review">
-						리뷰도 header누르면 펼치기
-					</div> -->
+					<div class="panel-body menu">
+						<ul class="list-group menu-items1">
+							<li class="list-group-item menu-item">
+								야채김밥
+								<span class="badge price">5000</span>
+							</li>
+							<li class="list-group-item menu-item">
+								제육볶음
+								<span class="badge price">7000</span>
+							</li>
+							<li class="list-group-item menu-item">
+								치즈돈까스
+								<span class="badge price">8000</span>
+							</li>
+						</ul>
+						<ul class="list-group menu-items2">
+							<li class="list-group-item menu-item">
+								야채김밥
+								<span class="badge price">5000</span>
+							</li>
+							<li class="list-group-item menu-item">
+								제육볶음
+								<span class="badge price">7000</span>
+							</li>
+							<li class="list-group-item menu-item">
+								치즈돈까스
+								<span class="badge price">8000</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="panel panel-info">
+					<div class="panel-heading review-header">
+						리뷰
+						<span class="badge review-count">5</span>
+						<img class="menuicon" src="./src/images/common/menu.png">
+					</div>
+					<div class="panel-body review">
+						<ul class="list-group review-items">
+							<li class="list-group-item review-item">
+								정말너무 맛있어요~~
+								<span class="badge score">4.3</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<br/>
 			</div>
 
 		</div>
@@ -105,19 +138,18 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-					<li><a href="/new_restaurant.html">맛집등록</a></li>
+					<li><a href="/new_restaurant">맛집등록</a></li>
 				</ul>
-				<form class="navbar-form navbar-right">
+				<!-- <form class="navbar-form navbar-right">
 					<div class="form-group">
 						<select class="form-control">
 							<option value="1">위치</option>
 							<option value="2">이름</option>
 						</select>
-
 						<input type="text" class="form-control" placeholder="Search">
 					</div>
 					<button type="submit" class="btn btn-default">검색</button>
-				</form>
+				</form> -->
 				<ul class="nav navbar-nav navbar-right">
 					<li>
 						<img class="profile"
@@ -125,8 +157,8 @@
 					</li>
 					<li>
 						<a href="#" id="userEmail">
-							<!-- <span class="profile_wrap"> </span> -->
-							<!-- rhehdrla@naver.com -->
+							<span class="profile_wrap"> </span>
+							<span th:text="${userEmail}">하이룽</span>
 						</a>
 					</li>
 

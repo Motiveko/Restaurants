@@ -27,16 +27,18 @@ public class SessionChecker {
 	
 	@Around("execution(* com.motiveko.restaurants..ViewController.*(..))"
 			+ "&&!execution(* com.motiveko.restaurants..ViewController.*login*(..))")
-	public String checkValidUser(ProceedingJoinPoint joinPoint) throws Throwable {
+	public ModelAndView checkValidUser(ProceedingJoinPoint joinPoint) throws Throwable {
 		System.out.println("Session Check");
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes())
 				.getRequest();
 		HttpSession session = request.getSession();
 
 		if(session.getAttribute("sEmail")==null) {
-			return "login";
+			return new ModelAndView("/login");
 		} else {
-			return (String) joinPoint.proceed();
+			ModelAndView mav = (ModelAndView) joinPoint.proceed();
+			mav.addObject("userEmail", session.getAttribute("sEmail"));
+			return mav;
 		}
 	}
 	

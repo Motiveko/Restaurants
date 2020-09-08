@@ -36,6 +36,7 @@ public class RestaurantServiceTest {
 		Long id = 1L;
 		String name = "까치식당";
 		String desc = "당산동소재 식당";
+		String address = "영등포구 영신로 193";
 		Double lat = 32.1234;
 		Double lng = 33.1234;
 		Integer category = 1;
@@ -48,6 +49,7 @@ public class RestaurantServiceTest {
 										.id(id)
 										.name(name)
 										.description(desc)
+										.address(address)
 										.lat(lat).lng(lng)
 										.category(category)
 										.startTime(startTime).endTime(endTime)
@@ -57,7 +59,7 @@ public class RestaurantServiceTest {
 		
 		Restaurant restaurant = restaurantService
 									.createRestaurant(
-										name, desc, lat, lng, category,
+										name, desc, address, lat, lng, category,
 										startTime, endTime, holiday, userName);
 		
 		verify(restaurantRepository).save(any());

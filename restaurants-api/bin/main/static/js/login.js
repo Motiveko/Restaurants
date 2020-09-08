@@ -50,7 +50,7 @@ const rootUrl = "http://localhost:8090";
 				data: string,
 				success: function (data,textStatus,jqXHR) {
 					console.log("data");
-					window.location.href = "/index";
+					window.location.href = "/";
 					// res로 넘어오는것은 http response의 body부분이다.
 					// console.log(res);
 					// console.log(jqXHR);

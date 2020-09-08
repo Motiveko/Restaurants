@@ -1,33 +1,8 @@
 // import { createPublicKey } from "crypto";
-
 const rootApiUrl = "http://localhost:8090";
 var markerList = [];
 
 $(document).ready(function () {
-	// 지도 외 일반기능
-
-	// Session 검증
-	// $.ajax({
-	// 	url: "/authentication",
-	// 	method: "GET",
-	// 	dataType: "json",
-	// 	success: function (res) {
-	// 		console.log(res);
-	// 		if (res.result == "SUCCESS") {
-	// 			console.log("Valid User!");
-	// 			$("#userEmail").text(res.email);
-				
-	// 		} else {
-	// 			console.log("사용자 인증 실패..");
-	// 			window.location.href = "/login";
-	// 		}
-	// 	},
-	// 	error: function () {
-	// 		console.log("error occured");
-	// 		window.location.href = "/login";
-	// 	}
-	// })
-
 	var lat;
 	var lng;
 	var map;
@@ -42,7 +17,6 @@ $(document).ready(function () {
 	});
 })
 
-
 // ************************************************************
 // ************************************************************
 
@@ -54,7 +28,6 @@ function getGeoData(callback) {
 			// callback when suceess
 			var lat = pos.coords.latitude;
 			var lng = pos.coords.longitude;
-
 			resolve({
 				"lat": lat,
 				"lng": lng
@@ -62,7 +35,6 @@ function getGeoData(callback) {
 		});
 	})
 }
-
 
 // 맵 랜더링	
 function renderMap(lat, lng) {
@@ -92,8 +64,17 @@ function renderMap(lat, lng) {
 	var mapBounds = map.getBounds();
 	getRestaurantCount(mapBounds);
 	getRestaurantList(map, mapBounds, 1);
+
+	// 페이징 버튼
+	$("ul.pagination").on('click','li',function(){
+		if($(this).hasClass("active") || $(this).hasClass("disabled")){
+			console.log("unclickable");
+		} else{
+			let page = $(this).attr("page");
+			getRestaurantList(map, mapBounds, page);
+		}
+	})
 	return map;
-	// renderMarker(map, lat, lng)
 }
 
 function addMorphBtnEvent(map,lat,lng){
@@ -133,11 +114,6 @@ function morphMap(map, lat, lng) {
 
 // 일반기능들..
 
-$(".restaurandList").on('click', 'tr', function (e) {
-	var restaurantId = $(this).attr("restaurantId");
-	// TODO : 레스토랑 상세정보 팝업	
-	console.log(restaurantId);
-})
 
 function getRestaurantCount(mapBounds){
 	var data = {
@@ -162,7 +138,6 @@ function getRestaurantCount(mapBounds){
 				var lastPage = res.lastPage;
 				renderPagingBtn(1,0,lastPage);
 				$(".lastBtn").attr("page",lastPage);
-
 			}		
 		},
 		error: function (){	
@@ -189,7 +164,7 @@ function getRestaurantList(map, mapBounds, page) {
 		dataType: "json",
 		data: data,
 		success: function (res) {
-			console.log(res);
+			// console.log(res);
 			var startNum;
 
 			if(page<=3) startNum = 1;
@@ -234,7 +209,10 @@ function renderPagingBtn(startNum, activeNum, lastPage){
 }
 
 function renderRestaurants(map, res){
-	console.log(res);
+	//마커지우기	
+	for( let marker of markerList) marker.setMap(null);
+	markerList = [];
+
 	var list = res.list;
 	var i = 0;
 	var alphabet = ['A','B','C','D','E','F','G','H','I','J'];
@@ -276,5 +254,34 @@ function removeMarker(){
 	// for( var m in markerList) m.setMap(null); // 이거는 안되는데 아래는 된다. 시바..?;;
 	for( var i=0; i<markerList.length; i++) markerList[i].setMap(null);
 }
+
+// ************************************************************
+// ************************************************************
+
+$(".restaurandList").on('click', 'tr', function (e) {
+	var restaurantId = $(this).attr("restaurantId");
+	// TODO : 레스토랑 상세정보 팝업
+	$(".popUp").css("display","block");
+	$( ".popUp_body" ).scrollTop( 0 );
+	console.log(restaurantId);
+})
+$(".popUp_bg").on('click',function(){
+	$(".popUp").css("display","none");
+})
+// 메뉴 보이기/숨기기
+$(".menu-header").on('click',function(){
+	if($(".menu").css('display')=='none'){
+		$(".menu").css('display','flex');
+	} else $(".menu").css('display','none');
+})
+
+// 리뷰 보이기/숨기기
+$(".review-header").on('click',function(){
+	if($(".review").css('display')=='none'){
+		$(".review").css('display','block');
+	} else $(".review").css('display','none');
+})
+
+
 
 

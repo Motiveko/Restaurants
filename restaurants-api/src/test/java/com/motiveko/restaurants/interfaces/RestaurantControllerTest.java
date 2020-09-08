@@ -48,8 +48,10 @@ public class RestaurantControllerTest {
 	@Test
 	public void createRestaurant() throws Exception {
 		
+		Long id = 5L;
 		String name = "까치식당";
 		String desc = "당산동소재 식당";
+		String address= "영등포구 영신로 193";
 		Double lat = 32.1234;
 		Double lng = 33.1234;
 		Integer category = 1;
@@ -59,23 +61,28 @@ public class RestaurantControllerTest {
 		
 		
 		Restaurant mockRestaurant = Restaurant.builder()
+										.id(id)
 										.name(name)
 										.description(desc)
 										.lat(lat).lng(lng)
 										.category(category)
 										.startTime(startTime).endTime(endTime)
-										.holiday(holiday).userName(userName).build();
+										.holiday(holiday).userName(userName)
+										.build();
 		
-//		given(session.getAttribute("sName")).willReturn(userName);
-		given(restaurantService.createRestaurant(name, desc, lat, lng, category, startTime, endTime, holiday,userName))
-					.willReturn(mockRestaurant);
+		given(restaurantService
+				.createRestaurant(name, desc, address, 
+									lat, lng, category, startTime,
+									endTime, holiday,userName))
+			.willReturn(mockRestaurant);
 		
+		System.out.println(mockRestaurant.getId());
 		
 		mvc.perform(post("/createRestaurant")
 				.session(session)
 				.contentType(MediaType.APPLICATION_JSON)
 				.content("{\"name\":\""+name+"\",\"description\":\""+desc+"\","
-						+ "\"lat\":\""+lat+"\",\"lng\":\""+lng+"\","
+						+ "\"lat\":\""+lat+"\",\"lng\":\""+lng+"\", \"address\":\""+address+"\","
 						+ "\"category\":\""+category+"\",\"startTime\":"+startTime+","
 						+ "\"endTime\":"+endTime+",\"holiday\":\""+holiday+"\"}"))
 				.andExpect(status().isCreated())

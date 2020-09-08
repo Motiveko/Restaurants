@@ -18,12 +18,13 @@ public class RestaurantService {
 		this.restaurantRepository = restaurantRepository;
 	}
 
-	public Restaurant createRestaurant(String name, String desc, Double lat, 
+	public Restaurant createRestaurant(String name, String desc, String address, Double lat, 
 									Double lng, Integer category, Integer startTime,
 									Integer endTime, String holiday, String userName) {
 		
 		Restaurant restaurant = Restaurant.builder()
 									.name(name).description(desc)
+									.address(address)
 									.lat(lat).lng(lng).category(category)
 									.startTime(startTime).endTime(endTime)
 									.userName(userName).holiday(holiday)
@@ -64,7 +65,6 @@ public class RestaurantService {
 		Double maxLng = Double.parseDouble(resources.get("maxLng"));
 		Double minLng = Double.parseDouble(resources.get("minLng"));
 		
-		System.out.println("이제 JPA실행합니다");
 		return restaurantRepository.count(minLat,maxLat,minLng,maxLng);
 	}
 

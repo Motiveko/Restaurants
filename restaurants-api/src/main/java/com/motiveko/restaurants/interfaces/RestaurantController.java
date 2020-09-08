@@ -37,9 +37,9 @@ public class RestaurantController {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> modelMap = new HashMap<>();
-		System.out.println("Resource : " + resource);
 		String name = resource.getName();
 		String desc = resource.getDescription();
+		String address = resource.getAddress();
 		Double lat = resource.getLat();
 		Double lng = resource.getLng();
 		Integer category = resource.getCategory();
@@ -50,7 +50,7 @@ public class RestaurantController {
 		String userName = (String) session.getAttribute("sName");
 		
 		Restaurant restaurant = restaurantService
-							.createRestaurant(name, desc, lat, lng, category, 
+							.createRestaurant(name, desc, address, lat, lng, category, 
 												startTime, endTime, holiday, userName);
 				
 		modelMap.put("result", "SUCCESS");
@@ -65,7 +65,6 @@ public class RestaurantController {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> modelMap = new HashMap<>();
-		System.out.println(resources);
 		long totalCount = restaurantService.getRestaurantCount(resources);
 
 
@@ -87,12 +86,10 @@ public class RestaurantController {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> modelMap = new HashMap<String, Object>();
-		System.out.println(resources);
 		
 		List<Restaurant> list = restaurantService.getRestaurantList(resources);
 		modelMap.put("list", list);
 		
-		System.out.println(mapper.writeValueAsString(modelMap));
 		return mapper.writeValueAsString(modelMap);
 	}
 
