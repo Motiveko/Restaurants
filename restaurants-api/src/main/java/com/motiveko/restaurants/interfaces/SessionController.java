@@ -20,8 +20,8 @@ import com.motiveko.restaurants.applications.UserService;
 import com.motiveko.restaurants.domains.SessionRequestDto;
 import com.motiveko.restaurants.domains.User;
 
+//@CrossOrigin
 @RestController
-@CrossOrigin
 public class SessionController {
 
 	

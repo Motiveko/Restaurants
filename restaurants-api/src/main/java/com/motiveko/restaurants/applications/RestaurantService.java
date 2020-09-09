@@ -1,6 +1,5 @@
 package com.motiveko.restaurants.applications;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 

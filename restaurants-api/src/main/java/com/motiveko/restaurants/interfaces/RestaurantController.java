@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.motiveko.restaurants.applications.RestaurantService;
 import com.motiveko.restaurants.domains.Restaurant;
 
-@CrossOrigin(origins = "http://localhost:3000")
+//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class RestaurantController {
 
