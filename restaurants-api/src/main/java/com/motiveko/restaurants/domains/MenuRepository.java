@@ -4,4 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface MenuRepository extends CrudRepository<MenuItem, Long>{
 
+	
+	MenuItem save(MenuItem menuItem);
 }
