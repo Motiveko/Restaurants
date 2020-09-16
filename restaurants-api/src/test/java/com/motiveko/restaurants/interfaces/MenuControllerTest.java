@@ -45,6 +45,7 @@ public class MenuControllerTest {
 			.andExpect(status().isCreated());
 	}
 	
+	@Test
 	public void createWithInvalidMenuItems() throws Exception {
 		Long id = 1L;
 		given(menuService.createMenuItems(any(),any())).willThrow(new SQLException());
